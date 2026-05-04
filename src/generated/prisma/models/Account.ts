@@ -490,11 +490,11 @@ export type AccountCreateInput = {
   lockoutUntil?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutAccountInput
+  user?: Prisma.UserCreateNestedOneWithoutAccountInput
 }
 
 export type AccountUncheckedCreateInput = {
-  id: string
+  id?: string
   authType?: $Enums.AuthType
   passwordHash?: string | null
   passwordChangedAt?: Date | string | null
@@ -569,7 +569,7 @@ export type AccountUncheckedUpdateInput = {
 }
 
 export type AccountCreateManyInput = {
-  id: string
+  id?: string
   authType?: $Enums.AuthType
   passwordHash?: string | null
   passwordChangedAt?: Date | string | null

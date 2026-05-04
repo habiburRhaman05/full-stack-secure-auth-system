@@ -7,18 +7,39 @@ import { tokenUtils } from "../../utils/token";
 import { envConfig } from "../../config/env";
 import status from "http-status"
 import { AppError } from "../../utils/AppError";
+import { jwtUtils } from "../../utils/jwt";
+import { emailQueue } from "../../queue/emailQueue";
+import { emailTypes } from "../../utils/email.utils";
 const isProduction = envConfig.NODE_ENV === "production";
 
 // -------------------- REGISTER --------------------
 const registerController = asyncHandler(async (req: Request, res: Response) => {
-  const { name, email, password ,contactNumber} = req.body;
+  const { name, email, password ,contactNumber,role} = req.body;
 
-  const result = await authServices.registerManager({
-    name, email, password,contactNumber
+  const user = await authServices.registerUser({
+    name, email, password,contactNumber,role
   })
+
+
+  
+
+    // email token with user info 
+  const emailToken =  jwtUtils.generateEmailToken({email:user.email,name:user.name});
+
+  const emailPayload = {
+    name:user.name,
+    email:user.email,
+    otp:user.otp,
+
+  }
+  // await emailQueue.add(emailTypes.sent_verify_email,emailPayload);
+  console.log(emailPayload);
+  
+
+
   return sendSuccess(res, {
     statusCode: 201,
-    data: result,
+    data: {...user,emailToken},
     message: " User Account Created Successfully"
   })
 });

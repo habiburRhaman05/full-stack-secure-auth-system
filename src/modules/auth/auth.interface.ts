@@ -5,7 +5,7 @@ export interface IRegisterPayload  {
   email: string;
   contactNumber: string;
   password: string;
-  role?:UserRole // optional, default = STUDENT
+  role:UserRole // optional, default = STUDENT
 };
 
 export interface ILoginUserPayload  {

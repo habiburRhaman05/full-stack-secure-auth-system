@@ -2,6 +2,12 @@ import ejs from "ejs";
 import path from "path";
 import { MailType, sendMail } from "./mailServices";
 import bcrypt from "bcrypt";
+
+
+export const emailTypes = {
+  "sent_verify_email":"SENT_VERFY_EMAIL"
+}
+
 export const EMAIL_CONFIG = {
   "payment-success": {
     template: "payment.ejs",

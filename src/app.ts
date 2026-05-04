@@ -15,7 +15,7 @@ const app: Express = express();
 app.set("trust proxy", 1);
 
 applyMiddleware(app);
-app.use("/api/v1",indexRouter)
+app.use("/api",indexRouter)
 app.set('views',path.join(`${cwd()}/src/templates`));
 
 

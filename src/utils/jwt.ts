@@ -1,9 +1,10 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import jwt, { JwtPayload, SignOptions } from "jsonwebtoken";
+import { envConfig } from "../config/env";
 
 
-const createToken = (payload: JwtPayload, secret: string, { expiresIn }: SignOptions) => {
+export const createToken = (payload: JwtPayload, secret: string, { expiresIn }: SignOptions) => {
     const token = jwt.sign(payload, secret, { expiresIn });
     return token;
 }
@@ -29,9 +30,17 @@ const decodeToken = (token: string) => {
     return decoded;
 }
 
+const generateEmailToken = (payload:{email:string;name:string;}) =>{
+        const token = jwt.sign(payload, envConfig.JWT_EMAIL_TOKEN_SECRET, { expiresIn:'5m' });
+        return token
+}
+
+
+
 
 export const jwtUtils = {
     createToken,
     verifyToken,
     decodeToken,
+    generateEmailToken
 }

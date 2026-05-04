@@ -3,7 +3,7 @@ import { Router } from "express";
 
 import { validateRequest } from "../../middleware/validateRequest";
 import { authControllers } from "./auth.controller";
-import { authSchemas } from "./auth.schema";
+import { authSchemas } from "./auth.validate";
 import { authMiddleware, roleMiddleware } from "../../middleware/auth-middlewares";
 
 const router: Router = Router();

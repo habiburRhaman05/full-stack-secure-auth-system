@@ -37,6 +37,7 @@ const envSchema = z.object({
   GROQ_API_KEY: z.string(),
   GROQ_MODEL: z.string(),
   FORM_EMAIL: z.string().email(),
+  JWT_EMAIL_TOKEN_SECRET:z.string(),
 });
 
 const parsed = envSchema.safeParse(process.env);
