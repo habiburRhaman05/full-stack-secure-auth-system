@@ -1,0 +1,99 @@
+import { Request, Response, NextFunction } from "express";
+import { prisma } from "../lib/prisma";
+import { CookieUtils } from "../utils/cookie";
+import { sendError } from "../utils/apiResponse";
+import { CustomerProfile, UserRole } from "../generated/prisma/client";
+
+export async function authMiddleware(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+  //   const sessionToken = 
+  //     CookieUtils.getCookie(req, "better-auth.session_token") || 
+  //     (req.headers.authorization?.startsWith("Bearer ") ? req.headers.authorization.split(" ")[1] : null);
+   
+
+  //   if (!sessionToken) {
+  //     return sendError(res, {
+  //       message: "Unauthorized: No session token provided",
+  //       statusCode: 401
+  //     });
+  //   }
+    
+  //  const token = sessionToken.split(".")[0];
+  //   const sessionData = await prisma.session.findUnique({
+  //     where: {
+  //       token: token,
+  //       expiresAt: { gt: new Date() }
+  //     },
+      
+  //     include: { user: {
+  //       include:{customerProfile:true,admin:true,manager:true}
+  //     } }
+  //   });
+ 
+  //   if (!sessionData || !sessionData.user) {
+  //     return sendError(res, {
+  //       message: "Unauthorized: Invalid or expired session",
+  //       statusCode: 401
+  //     });
+  //   }
+
+  //   const { user } = sessionData;
+
+
+
+  //   if (user.status === "BANNED" || user.status === "DELETED" || user.isDeleted) {
+  //     return sendError(res, {
+  //       message: `Unauthorized: Account is ${user.status.toLowerCase()}`,
+  //       statusCode: 403
+  //     });
+  //   }
+
+  //   const now = new Date().getTime();
+  //   const expiresAt = new Date(sessionData.expiresAt).getTime();
+  //   const createdAt = new Date(sessionData.createdAt).getTime();
+
+  //   const totalLifetime = expiresAt - createdAt;
+  //   const remainingTime = expiresAt - now;
+  //   const percentRemaining = (remainingTime / totalLifetime) * 100;
+
+  //   if (percentRemaining < 20) {
+  //     res.setHeader('X-Session-Refresh', 'true');
+  //     res.setHeader('X-Session-Expires-At', sessionData.expiresAt.toISOString());
+  //   }
+
+  //   res.locals.auth = {
+  //     userId: user.id,
+  //     role: user.role,
+  //     email: user.email,
+  //   };
+  //   res.locals.user = user.role === UserRole.USER ? user.customerProfile as CustomerProfile :  user.role === UserRole.MANAGER ?  user.manager : user.admin as any
+
+    return next();
+  } catch (error) {
+    console.error("Auth Middleware Error:", error);
+    return res.status(500).json({
+      success: false,
+      error: "Internal server error during authentication"
+    });
+  }
+}
+
+export function roleMiddleware(allowedRoles: ("ADMIN" | "USER" | "MANAGER")[]) {
+  return (req: Request, res: Response, next: NextFunction) => {
+    // const auth = res.locals.auth;
+
+    // if (!auth || !allowedRoles.includes(auth.role)) {
+    //   return sendError(res,{
+    //       errors: true,
+    //     message: "Forbidden: You do not have permission to perform this action", 
+    //   statusCode:403
+    //   })
+    // }
+
+    next();
+  };
+}
