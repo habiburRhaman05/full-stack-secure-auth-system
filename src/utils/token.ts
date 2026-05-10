@@ -1,61 +1,49 @@
-import { Response } from "express";
-import { JwtPayload, SignOptions } from "jsonwebtoken";
-import { jwtUtils } from "./jwt";
+import type { CookieOptions, Response } from "express";
 import { envConfig } from "../config/env";
 import { CookieUtils } from "./cookie";
 
+const isProd = envConfig.NODE_ENV === "production";
 
+export const ACCESS_COOKIE_NAME = "access_token";
+export const REFRESH_COOKIE_NAME = "refresh_token";
 
-const getAccessToken = (payload: JwtPayload) => {
-    return jwtUtils.createToken(
-        payload,
-        envConfig.ACCESS_TOKEN_SECRET,
-        { expiresIn: envConfig.ACCESS_TOKEN_EXPIRES_IN } as SignOptions
-    );
-}
+const ACCESS_TTL_MS = 15 * 60 * 1000; // 15 minutes
+const REFRESH_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
-const getRefreshToken = (payload: JwtPayload) => {
-    return jwtUtils.createToken(
-        payload,
-        envConfig.REFRESH_TOKEN_SECRET,
-        { expiresIn: envConfig.REFRESH_TOKEN_EXPIRES_IN } as SignOptions
-    );
-}
+const baseCookie = (maxAge: number, path: string): CookieOptions => ({
+  httpOnly: true,
+  secure: isProd,
+  sameSite: isProd ? "strict" : "lax",
+  path,
+  maxAge,
+  ...(envConfig.COOKIE_DOMAIN ? { domain: envConfig.COOKIE_DOMAIN } : {}),
+});
 
-const setAccessTokenCookie = (res: Response, token: string) => {
-    CookieUtils.setCookie(res, 'accessToken', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite:"none",
-        path: '/',
-        maxAge: 60 * 60 * 1000, // 60 minutes in milliseconds
-    });
-}
+export const setAccessTokenCookie = (res: Response, token: string): void => {
+  CookieUtils.setCookie(res, ACCESS_COOKIE_NAME, token, baseCookie(ACCESS_TTL_MS, "/"));
+};
 
-const setRefreshTokenCookie = (res: Response, token: string) => {
-    CookieUtils.setCookie(res, 'refreshToken', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite:"none",
-        path: '/',
-        maxAge: 120 * 60 * 1000, // 2 days in milliseconds
-    });
-}
+export const setRefreshTokenCookie = (res: Response, token: string): void => {
+  // Tighter path scope: only sent on refresh & logout endpoints
+  CookieUtils.setCookie(
+    res,
+    REFRESH_COOKIE_NAME,
+    token,
+    baseCookie(REFRESH_TTL_MS, "/api/auth")
+  );
+};
 
-const setBetterAuthSessionCookie = (res: Response, token: string) => {
-    CookieUtils.setCookie(res, "better-auth.session_token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-        path: '/',
-        maxAge: 60 * 60 * 1000, // 60 minutes in milliseconds
-    });
-}
+export const clearAuthCookies = (res: Response): void => {
+  const accessOpts = baseCookie(0, "/");
+  const refreshOpts = baseCookie(0, "/api/auth");
+  CookieUtils.clearCookie(res, ACCESS_COOKIE_NAME, accessOpts);
+  CookieUtils.clearCookie(res, REFRESH_COOKIE_NAME, refreshOpts);
+};
 
 export const tokenUtils = {
-    getAccessToken,
-    getRefreshToken,
-    setAccessTokenCookie,
-    setRefreshTokenCookie,
-    setBetterAuthSessionCookie,
-}
+  setAccessTokenCookie,
+  setRefreshTokenCookie,
+  clearAuthCookies,
+  ACCESS_COOKIE_NAME,
+  REFRESH_COOKIE_NAME,
+};

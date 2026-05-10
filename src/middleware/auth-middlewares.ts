@@ -1,99 +1,135 @@
-import { Request, Response, NextFunction } from "express";
+import type { NextFunction, Request, Response } from "express";
+import jwt from "jsonwebtoken";
 import { prisma } from "../lib/prisma";
-import { CookieUtils } from "../utils/cookie";
 import { sendError } from "../utils/apiResponse";
-import { CustomerProfile, UserRole } from "../generated/prisma/client";
+import { CookieUtils } from "../utils/cookie";
+import { verifyAccessToken } from "../utils/jwt";
+import {
+  clearCachedUser,
+  getCachedUser,
+  isJtiBlacklisted,
+  isUserBanned,
+  setCachedUser,
+} from "../utils/redisAuth";
+import { ACCESS_COOKIE_NAME } from "../utils/token";
 
-export async function authMiddleware(
+const extractAccessToken = (req: Request): string | null => {
+  const fromCookie = CookieUtils.getCookie(req, ACCESS_COOKIE_NAME);
+  if (fromCookie) return fromCookie;
+  const header = req.headers.authorization;
+  if (header?.startsWith("Bearer ")) return header.slice(7);
+  return null;
+};
+
+export const authMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): Promise<void> => {
   try {
-  //   const sessionToken = 
-  //     CookieUtils.getCookie(req, "better-auth.session_token") || 
-  //     (req.headers.authorization?.startsWith("Bearer ") ? req.headers.authorization.split(" ")[1] : null);
-   
+    const token = extractAccessToken(req);
+    if (!token) {
+      sendError(res, { statusCode: 401, message: "Unauthorized: missing access token" });
+      return;
+    }
 
-  //   if (!sessionToken) {
-  //     return sendError(res, {
-  //       message: "Unauthorized: No session token provided",
-  //       statusCode: 401
-  //     });
-  //   }
-    
-  //  const token = sessionToken.split(".")[0];
-  //   const sessionData = await prisma.session.findUnique({
-  //     where: {
-  //       token: token,
-  //       expiresAt: { gt: new Date() }
-  //     },
-      
-  //     include: { user: {
-  //       include:{customerProfile:true,admin:true,manager:true}
-  //     } }
-  //   });
- 
-  //   if (!sessionData || !sessionData.user) {
-  //     return sendError(res, {
-  //       message: "Unauthorized: Invalid or expired session",
-  //       statusCode: 401
-  //     });
-  //   }
+    let decoded;
+    try {
+      decoded = verifyAccessToken(token);
+    } catch (err) {
+      if (err instanceof jwt.TokenExpiredError) {
+        sendError(res, { statusCode: 401, message: "Access token expired" });
+        return;
+      }
+      sendError(res, { statusCode: 401, message: "Invalid access token" });
+      return;
+    }
 
-  //   const { user } = sessionData;
+    if (await isJtiBlacklisted(decoded.jti)) {
+      sendError(res, { statusCode: 401, message: "Token has been revoked" });
+      return;
+    }
 
+    if (await isUserBanned(decoded.sub)) {
+      sendError(res, { statusCode: 403, message: "Account is banned" });
+      return;
+    }
 
+    let cached = await getCachedUser(decoded.sub);
+    if (!cached) {
+      const user = await prisma.user.findFirst({
+        where: { id: decoded.sub, deletedAt: null },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          role: true,
+          status: true,
+          emailVerified: true,
+          twoFactorEnabled: true,
+          authProvider: true,
+          avatarUrl: true,
+        },
+      });
+      if (!user) {
+        sendError(res, { statusCode: 401, message: "User not found" });
+        return;
+      }
+      if (user.status === "banned") {
+        sendError(res, { statusCode: 403, message: "Account is banned" });
+        return;
+      }
+      cached = {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        status: user.status,
+        emailVerified: user.emailVerified,
+        twoFactorEnabled: user.twoFactorEnabled,
+        authProvider: user.authProvider,
+        avatarUrl: user.avatarUrl ?? null,
+      };
+      await setCachedUser(cached);
+    }
 
-  //   if (user.status === "BANNED" || user.status === "DELETED" || user.isDeleted) {
-  //     return sendError(res, {
-  //       message: `Unauthorized: Account is ${user.status.toLowerCase()}`,
-  //       statusCode: 403
-  //     });
-  //   }
-
-  //   const now = new Date().getTime();
-  //   const expiresAt = new Date(sessionData.expiresAt).getTime();
-  //   const createdAt = new Date(sessionData.createdAt).getTime();
-
-  //   const totalLifetime = expiresAt - createdAt;
-  //   const remainingTime = expiresAt - now;
-  //   const percentRemaining = (remainingTime / totalLifetime) * 100;
-
-  //   if (percentRemaining < 20) {
-  //     res.setHeader('X-Session-Refresh', 'true');
-  //     res.setHeader('X-Session-Expires-At', sessionData.expiresAt.toISOString());
-  //   }
-
-  //   res.locals.auth = {
-  //     userId: user.id,
-  //     role: user.role,
-  //     email: user.email,
-  //   };
-  //   res.locals.user = user.role === UserRole.USER ? user.customerProfile as CustomerProfile :  user.role === UserRole.MANAGER ?  user.manager : user.admin as any
-
-    return next();
-  } catch (error) {
-    console.error("Auth Middleware Error:", error);
-    return res.status(500).json({
-      success: false,
-      error: "Internal server error during authentication"
-    });
-  }
-}
-
-export function roleMiddleware(allowedRoles: ("ADMIN" | "USER" | "MANAGER")[]) {
-  return (req: Request, res: Response, next: NextFunction) => {
-    // const auth = res.locals.auth;
-
-    // if (!auth || !allowedRoles.includes(auth.role)) {
-    //   return sendError(res,{
-    //       errors: true,
-    //     message: "Forbidden: You do not have permission to perform this action", 
-    //   statusCode:403
-    //   })
-    // }
+    req.user = cached;
+    req.auth = {
+      userId: cached.id,
+      jti: decoded.jti,
+      role: cached.role,
+      accessTokenExp: decoded.exp ?? 0,
+    };
+    res.locals.user = cached;
+    res.locals.auth = req.auth;
 
     next();
+  } catch (error) {
+    console.error("Auth Middleware Error:", error);
+    sendError(res, { statusCode: 500, message: "Internal server error during authentication" });
+  }
+};
+
+/**
+ * Require a specific role (or any of several roles).
+ * Usage: authorize("admin"), authorize("admin", "moderator")
+ */
+export const authorize = (...allowedRoles: string[]) => {
+  return (req: Request, res: Response, next: NextFunction): void => {
+    if (!req.user) {
+      sendError(res, { statusCode: 401, message: "Unauthorized" });
+      return;
+    }
+    if (!allowedRoles.includes(req.user.role)) {
+      sendError(res, { statusCode: 403, message: "Forbidden: insufficient permissions" });
+      return;
+    }
+    next();
   };
-}
+};
+
+/** Invalidate a user's cache entry. Call after profile updates / role change / ban. */
+export const invalidateUserCache = (userId: string): Promise<void> => clearCachedUser(userId);
+
+// Legacy alias
+export const roleMiddleware = (roles: string[]) => authorize(...roles);

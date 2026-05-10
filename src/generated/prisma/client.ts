@@ -47,37 +47,17 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
- * Model Account
- * 
- */
-export type Account = Prisma.AccountModel
-/**
- * Model OAuthProviderOptions
- * 
- */
-export type OAuthProviderOptions = Prisma.OAuthProviderOptionsModel
-/**
  * Model Session
  * 
  */
 export type Session = Prisma.SessionModel
 /**
- * Model CustomerProfile
+ * Model EmailVerification
  * 
  */
-export type CustomerProfile = Prisma.CustomerProfileModel
+export type EmailVerification = Prisma.EmailVerificationModel
 /**
- * Model AdminProfile
+ * Model PasswordReset
  * 
  */
-export type AdminProfile = Prisma.AdminProfileModel
-/**
- * Model PasswordHistory
- * 
- */
-export type PasswordHistory = Prisma.PasswordHistoryModel
-/**
- * Model AuditLog
- * 
- */
-export type AuditLog = Prisma.AuditLogModel
+export type PasswordReset = Prisma.PasswordResetModel

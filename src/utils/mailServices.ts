@@ -6,8 +6,9 @@ import { mailTransport } from "./mailTransporter";
  */
 export type MailType =
   | "verify-email"
-  | "reset-email"
-  | "payment-success-email";
+  | "reset-password"
+  | "two-factor"
+  | "payment-success";
 
 /**
  * Input Contract

@@ -1,18 +1,19 @@
-
-import { User, Session } from "better-auth";
-import { UserRole } from "../generated/prisma/enums";
-import { CustomerProfile } from "../generated/prisma/client";
+import type { CachedUser } from "../utils/redisAuth";
 
 declare global {
   namespace Express {
-    interface Locals {
-    user:CustomerProfile,
-      auth: {
+    interface Request {
+      user?: CachedUser;
+      auth?: {
         userId: string;
-        email: string;
-        role: UserRole
-      
-      }
+        jti: string;
+        role: string;
+        accessTokenExp: number;
+      };
+      validated?: unknown;
+      rawBody?: Buffer;
     }
   }
 }
+
+export {};

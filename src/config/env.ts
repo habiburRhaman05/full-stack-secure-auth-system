@@ -18,9 +18,12 @@ const envSchema = z.object({
   REFRESH_TOKEN_SECRET: z.string().min(32),
   REFRESH_TOKEN_EXPIRES_IN: z.string().default('7d'),
 
-  BETTER_AUTH_URL: z.string(),
+  BETTER_AUTH_URL: z.string().optional(),
   GOOGLE_CLIENT_SECRET: z.string(),
   GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_REDIRECT_URI: z.string().default('http://localhost:8000/api/auth/google/callback'),
+  TOTP_ENCRYPTION_KEY: z.string().min(32).default('0123456789abcdef0123456789abcdef'),
+  COOKIE_DOMAIN: z.string().optional(),
   CLOUDINARY_NAME: z.string(),
   CLOUDINARY_KEY: z.string(),
   CLOUDINARY_SECRET: z.string(),
@@ -37,7 +40,8 @@ const envSchema = z.object({
   GROQ_API_KEY: z.string(),
   GROQ_MODEL: z.string(),
   FORM_EMAIL: z.string().email(),
-  JWT_EMAIL_TOKEN_SECRET:z.string(),
+  JWT_EMAIL_TOKEN_SECRET: z.string(),
+  TEMP_2FA_TOKEN_SECRET: z.string().min(32).default('change-me-in-production-please-32chars'),
 });
 
 const parsed = envSchema.safeParse(process.env);

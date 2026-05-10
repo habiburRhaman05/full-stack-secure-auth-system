@@ -1,32 +1,46 @@
-import { UserRole } from "../../generated/prisma/enums";
+import type { UserRole } from "../../generated/prisma/enums";
+import type { DeviceInfo } from "../../utils/deviceInfo";
 
-export interface IRegisterPayload  {
+export interface IRegisterPayload {
   name: string;
   email: string;
-  contactNumber: string;
   password: string;
-  role:UserRole // optional, default = STUDENT
-};
+  role?: UserRole;
+  agreeTerms: boolean;
+}
 
-export interface ILoginUserPayload  {
+export interface ILoginPayload {
   email: string;
   password: string;
-};
-
-
-export interface IRequestUser{
-  role:string;
-  userId:string;
-  email: string;
-
-}
-export interface IUpdateUser{
-  name?:string;
-  image?:string;
-}
-export interface IChangePassword{
-  sessionToken:string;
-  currentPassword:string;
-  newPassword:string;
 }
 
+export interface IRequestContext {
+  userAgent: string;
+  ipAddress: string | undefined;
+  deviceInfo: DeviceInfo;
+}
+
+export interface IVerifyEmailPayload {
+  token: string;
+  otp: string;
+}
+
+export interface IVerify2FAPayload {
+  tempToken: string;
+  otp: string;
+}
+
+export interface IResetPasswordPayload {
+  token: string;
+  newPassword: string;
+}
+
+export interface IChangePasswordPayload {
+  currentPassword: string;
+  newPassword: string;
+}
+
+export interface IUpdateProfilePayload {
+  name?: string | undefined;
+  avatarUrl?: string | undefined;
+}

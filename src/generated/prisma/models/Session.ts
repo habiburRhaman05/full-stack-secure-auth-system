@@ -27,16 +27,9 @@ export type AggregateSession = {
 export type SessionMinAggregateOutputType = {
   id: string | null
   userId: string | null
-  refreshTokenHash: string | null
+  refreshToken: string | null
   jti: string | null
-  deviceId: string | null
-  deviceName: string | null
-  deviceType: $Enums.DeviceType | null
-  browser: string | null
-  os: string | null
   ipAddress: string | null
-  ipCountry: string | null
-  ipCity: string | null
   userAgent: string | null
   isActive: boolean | null
   revokedAt: Date | null
@@ -49,16 +42,9 @@ export type SessionMinAggregateOutputType = {
 export type SessionMaxAggregateOutputType = {
   id: string | null
   userId: string | null
-  refreshTokenHash: string | null
+  refreshToken: string | null
   jti: string | null
-  deviceId: string | null
-  deviceName: string | null
-  deviceType: $Enums.DeviceType | null
-  browser: string | null
-  os: string | null
   ipAddress: string | null
-  ipCountry: string | null
-  ipCity: string | null
   userAgent: string | null
   isActive: boolean | null
   revokedAt: Date | null
@@ -71,16 +57,10 @@ export type SessionMaxAggregateOutputType = {
 export type SessionCountAggregateOutputType = {
   id: number
   userId: number
-  refreshTokenHash: number
+  refreshToken: number
   jti: number
-  deviceId: number
-  deviceName: number
-  deviceType: number
-  browser: number
-  os: number
+  deviceInfo: number
   ipAddress: number
-  ipCountry: number
-  ipCity: number
   userAgent: number
   isActive: number
   revokedAt: number
@@ -95,16 +75,9 @@ export type SessionCountAggregateOutputType = {
 export type SessionMinAggregateInputType = {
   id?: true
   userId?: true
-  refreshTokenHash?: true
+  refreshToken?: true
   jti?: true
-  deviceId?: true
-  deviceName?: true
-  deviceType?: true
-  browser?: true
-  os?: true
   ipAddress?: true
-  ipCountry?: true
-  ipCity?: true
   userAgent?: true
   isActive?: true
   revokedAt?: true
@@ -117,16 +90,9 @@ export type SessionMinAggregateInputType = {
 export type SessionMaxAggregateInputType = {
   id?: true
   userId?: true
-  refreshTokenHash?: true
+  refreshToken?: true
   jti?: true
-  deviceId?: true
-  deviceName?: true
-  deviceType?: true
-  browser?: true
-  os?: true
   ipAddress?: true
-  ipCountry?: true
-  ipCity?: true
   userAgent?: true
   isActive?: true
   revokedAt?: true
@@ -139,16 +105,10 @@ export type SessionMaxAggregateInputType = {
 export type SessionCountAggregateInputType = {
   id?: true
   userId?: true
-  refreshTokenHash?: true
+  refreshToken?: true
   jti?: true
-  deviceId?: true
-  deviceName?: true
-  deviceType?: true
-  browser?: true
-  os?: true
+  deviceInfo?: true
   ipAddress?: true
-  ipCountry?: true
-  ipCity?: true
   userAgent?: true
   isActive?: true
   revokedAt?: true
@@ -234,16 +194,10 @@ export type SessionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type SessionGroupByOutputType = {
   id: string
   userId: string
-  refreshTokenHash: string
-  jti: string | null
-  deviceId: string | null
-  deviceName: string | null
-  deviceType: $Enums.DeviceType | null
-  browser: string | null
-  os: string | null
+  refreshToken: string
+  jti: string
+  deviceInfo: runtime.JsonValue | null
   ipAddress: string | null
-  ipCountry: string | null
-  ipCity: string | null
   userAgent: string | null
   isActive: boolean
   revokedAt: Date | null
@@ -277,16 +231,10 @@ export type SessionWhereInput = {
   NOT?: Prisma.SessionWhereInput | Prisma.SessionWhereInput[]
   id?: Prisma.UuidFilter<"Session"> | string
   userId?: Prisma.UuidFilter<"Session"> | string
-  refreshTokenHash?: Prisma.StringFilter<"Session"> | string
-  jti?: Prisma.StringNullableFilter<"Session"> | string | null
-  deviceId?: Prisma.StringNullableFilter<"Session"> | string | null
-  deviceName?: Prisma.StringNullableFilter<"Session"> | string | null
-  deviceType?: Prisma.EnumDeviceTypeNullableFilter<"Session"> | $Enums.DeviceType | null
-  browser?: Prisma.StringNullableFilter<"Session"> | string | null
-  os?: Prisma.StringNullableFilter<"Session"> | string | null
+  refreshToken?: Prisma.StringFilter<"Session"> | string
+  jti?: Prisma.StringFilter<"Session"> | string
+  deviceInfo?: Prisma.JsonNullableFilter<"Session">
   ipAddress?: Prisma.StringNullableFilter<"Session"> | string | null
-  ipCountry?: Prisma.StringNullableFilter<"Session"> | string | null
-  ipCity?: Prisma.StringNullableFilter<"Session"> | string | null
   userAgent?: Prisma.StringNullableFilter<"Session"> | string | null
   isActive?: Prisma.BoolFilter<"Session"> | boolean
   revokedAt?: Prisma.DateTimeNullableFilter<"Session"> | Date | string | null
@@ -295,22 +243,15 @@ export type SessionWhereInput = {
   lastActiveAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  auditLogs?: Prisma.AuditLogListRelationFilter
 }
 
 export type SessionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  refreshTokenHash?: Prisma.SortOrder
-  jti?: Prisma.SortOrderInput | Prisma.SortOrder
-  deviceId?: Prisma.SortOrderInput | Prisma.SortOrder
-  deviceName?: Prisma.SortOrderInput | Prisma.SortOrder
-  deviceType?: Prisma.SortOrderInput | Prisma.SortOrder
-  browser?: Prisma.SortOrderInput | Prisma.SortOrder
-  os?: Prisma.SortOrderInput | Prisma.SortOrder
+  refreshToken?: Prisma.SortOrder
+  jti?: Prisma.SortOrder
+  deviceInfo?: Prisma.SortOrderInput | Prisma.SortOrder
   ipAddress?: Prisma.SortOrderInput | Prisma.SortOrder
-  ipCountry?: Prisma.SortOrderInput | Prisma.SortOrder
-  ipCity?: Prisma.SortOrderInput | Prisma.SortOrder
   userAgent?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   revokedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -319,25 +260,18 @@ export type SessionOrderByWithRelationInput = {
   lastActiveAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
-  auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
 }
 
 export type SessionWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  refreshToken?: string
   jti?: string
   AND?: Prisma.SessionWhereInput | Prisma.SessionWhereInput[]
   OR?: Prisma.SessionWhereInput[]
   NOT?: Prisma.SessionWhereInput | Prisma.SessionWhereInput[]
   userId?: Prisma.UuidFilter<"Session"> | string
-  refreshTokenHash?: Prisma.StringFilter<"Session"> | string
-  deviceId?: Prisma.StringNullableFilter<"Session"> | string | null
-  deviceName?: Prisma.StringNullableFilter<"Session"> | string | null
-  deviceType?: Prisma.EnumDeviceTypeNullableFilter<"Session"> | $Enums.DeviceType | null
-  browser?: Prisma.StringNullableFilter<"Session"> | string | null
-  os?: Prisma.StringNullableFilter<"Session"> | string | null
+  deviceInfo?: Prisma.JsonNullableFilter<"Session">
   ipAddress?: Prisma.StringNullableFilter<"Session"> | string | null
-  ipCountry?: Prisma.StringNullableFilter<"Session"> | string | null
-  ipCity?: Prisma.StringNullableFilter<"Session"> | string | null
   userAgent?: Prisma.StringNullableFilter<"Session"> | string | null
   isActive?: Prisma.BoolFilter<"Session"> | boolean
   revokedAt?: Prisma.DateTimeNullableFilter<"Session"> | Date | string | null
@@ -346,22 +280,15 @@ export type SessionWhereUniqueInput = Prisma.AtLeast<{
   lastActiveAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  auditLogs?: Prisma.AuditLogListRelationFilter
-}, "id" | "jti">
+}, "id" | "refreshToken" | "jti">
 
 export type SessionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  refreshTokenHash?: Prisma.SortOrder
-  jti?: Prisma.SortOrderInput | Prisma.SortOrder
-  deviceId?: Prisma.SortOrderInput | Prisma.SortOrder
-  deviceName?: Prisma.SortOrderInput | Prisma.SortOrder
-  deviceType?: Prisma.SortOrderInput | Prisma.SortOrder
-  browser?: Prisma.SortOrderInput | Prisma.SortOrder
-  os?: Prisma.SortOrderInput | Prisma.SortOrder
+  refreshToken?: Prisma.SortOrder
+  jti?: Prisma.SortOrder
+  deviceInfo?: Prisma.SortOrderInput | Prisma.SortOrder
   ipAddress?: Prisma.SortOrderInput | Prisma.SortOrder
-  ipCountry?: Prisma.SortOrderInput | Prisma.SortOrder
-  ipCity?: Prisma.SortOrderInput | Prisma.SortOrder
   userAgent?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   revokedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -380,16 +307,10 @@ export type SessionScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SessionScalarWhereWithAggregatesInput | Prisma.SessionScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"Session"> | string
   userId?: Prisma.UuidWithAggregatesFilter<"Session"> | string
-  refreshTokenHash?: Prisma.StringWithAggregatesFilter<"Session"> | string
-  jti?: Prisma.StringNullableWithAggregatesFilter<"Session"> | string | null
-  deviceId?: Prisma.StringNullableWithAggregatesFilter<"Session"> | string | null
-  deviceName?: Prisma.StringNullableWithAggregatesFilter<"Session"> | string | null
-  deviceType?: Prisma.EnumDeviceTypeNullableWithAggregatesFilter<"Session"> | $Enums.DeviceType | null
-  browser?: Prisma.StringNullableWithAggregatesFilter<"Session"> | string | null
-  os?: Prisma.StringNullableWithAggregatesFilter<"Session"> | string | null
+  refreshToken?: Prisma.StringWithAggregatesFilter<"Session"> | string
+  jti?: Prisma.StringWithAggregatesFilter<"Session"> | string
+  deviceInfo?: Prisma.JsonNullableWithAggregatesFilter<"Session">
   ipAddress?: Prisma.StringNullableWithAggregatesFilter<"Session"> | string | null
-  ipCountry?: Prisma.StringNullableWithAggregatesFilter<"Session"> | string | null
-  ipCity?: Prisma.StringNullableWithAggregatesFilter<"Session"> | string | null
   userAgent?: Prisma.StringNullableWithAggregatesFilter<"Session"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Session"> | boolean
   revokedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Session"> | Date | string | null
@@ -401,16 +322,10 @@ export type SessionScalarWhereWithAggregatesInput = {
 
 export type SessionCreateInput = {
   id?: string
-  refreshTokenHash: string
-  jti?: string | null
-  deviceId?: string | null
-  deviceName?: string | null
-  deviceType?: $Enums.DeviceType | null
-  browser?: string | null
-  os?: string | null
+  refreshToken: string
+  jti: string
+  deviceInfo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipAddress?: string | null
-  ipCountry?: string | null
-  ipCity?: string | null
   userAgent?: string | null
   isActive?: boolean
   revokedAt?: Date | string | null
@@ -419,22 +334,15 @@ export type SessionCreateInput = {
   lastActiveAt?: Date | string
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutSessionsInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSessionInput
 }
 
 export type SessionUncheckedCreateInput = {
   id?: string
   userId: string
-  refreshTokenHash: string
-  jti?: string | null
-  deviceId?: string | null
-  deviceName?: string | null
-  deviceType?: $Enums.DeviceType | null
-  browser?: string | null
-  os?: string | null
+  refreshToken: string
+  jti: string
+  deviceInfo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipAddress?: string | null
-  ipCountry?: string | null
-  ipCity?: string | null
   userAgent?: string | null
   isActive?: boolean
   revokedAt?: Date | string | null
@@ -442,21 +350,14 @@ export type SessionUncheckedCreateInput = {
   expiresAt: Date | string
   lastActiveAt?: Date | string
   createdAt?: Date | string
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSessionInput
 }
 
 export type SessionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  refreshTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
-  jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceType?: Prisma.NullableEnumDeviceTypeFieldUpdateOperationsInput | $Enums.DeviceType | null
-  browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  os?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refreshToken?: Prisma.StringFieldUpdateOperationsInput | string
+  jti?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceInfo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -465,22 +366,15 @@ export type SessionUpdateInput = {
   lastActiveAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutSessionsNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutSessionNestedInput
 }
 
 export type SessionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  refreshTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
-  jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceType?: Prisma.NullableEnumDeviceTypeFieldUpdateOperationsInput | $Enums.DeviceType | null
-  browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  os?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refreshToken?: Prisma.StringFieldUpdateOperationsInput | string
+  jti?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceInfo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -488,22 +382,15 @@ export type SessionUncheckedUpdateInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSessionNestedInput
 }
 
 export type SessionCreateManyInput = {
   id?: string
   userId: string
-  refreshTokenHash: string
-  jti?: string | null
-  deviceId?: string | null
-  deviceName?: string | null
-  deviceType?: $Enums.DeviceType | null
-  browser?: string | null
-  os?: string | null
+  refreshToken: string
+  jti: string
+  deviceInfo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipAddress?: string | null
-  ipCountry?: string | null
-  ipCity?: string | null
   userAgent?: string | null
   isActive?: boolean
   revokedAt?: Date | string | null
@@ -515,16 +402,10 @@ export type SessionCreateManyInput = {
 
 export type SessionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  refreshTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
-  jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceType?: Prisma.NullableEnumDeviceTypeFieldUpdateOperationsInput | $Enums.DeviceType | null
-  browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  os?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refreshToken?: Prisma.StringFieldUpdateOperationsInput | string
+  jti?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceInfo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -537,16 +418,10 @@ export type SessionUpdateManyMutationInput = {
 export type SessionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  refreshTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
-  jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceType?: Prisma.NullableEnumDeviceTypeFieldUpdateOperationsInput | $Enums.DeviceType | null
-  browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  os?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refreshToken?: Prisma.StringFieldUpdateOperationsInput | string
+  jti?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceInfo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -569,16 +444,10 @@ export type SessionOrderByRelationAggregateInput = {
 export type SessionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  refreshTokenHash?: Prisma.SortOrder
+  refreshToken?: Prisma.SortOrder
   jti?: Prisma.SortOrder
-  deviceId?: Prisma.SortOrder
-  deviceName?: Prisma.SortOrder
-  deviceType?: Prisma.SortOrder
-  browser?: Prisma.SortOrder
-  os?: Prisma.SortOrder
+  deviceInfo?: Prisma.SortOrder
   ipAddress?: Prisma.SortOrder
-  ipCountry?: Prisma.SortOrder
-  ipCity?: Prisma.SortOrder
   userAgent?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   revokedAt?: Prisma.SortOrder
@@ -591,16 +460,9 @@ export type SessionCountOrderByAggregateInput = {
 export type SessionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  refreshTokenHash?: Prisma.SortOrder
+  refreshToken?: Prisma.SortOrder
   jti?: Prisma.SortOrder
-  deviceId?: Prisma.SortOrder
-  deviceName?: Prisma.SortOrder
-  deviceType?: Prisma.SortOrder
-  browser?: Prisma.SortOrder
-  os?: Prisma.SortOrder
   ipAddress?: Prisma.SortOrder
-  ipCountry?: Prisma.SortOrder
-  ipCity?: Prisma.SortOrder
   userAgent?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   revokedAt?: Prisma.SortOrder
@@ -613,16 +475,9 @@ export type SessionMaxOrderByAggregateInput = {
 export type SessionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  refreshTokenHash?: Prisma.SortOrder
+  refreshToken?: Prisma.SortOrder
   jti?: Prisma.SortOrder
-  deviceId?: Prisma.SortOrder
-  deviceName?: Prisma.SortOrder
-  deviceType?: Prisma.SortOrder
-  browser?: Prisma.SortOrder
-  os?: Prisma.SortOrder
   ipAddress?: Prisma.SortOrder
-  ipCountry?: Prisma.SortOrder
-  ipCity?: Prisma.SortOrder
   userAgent?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   revokedAt?: Prisma.SortOrder
@@ -630,11 +485,6 @@ export type SessionMinOrderByAggregateInput = {
   expiresAt?: Prisma.SortOrder
   lastActiveAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-}
-
-export type SessionNullableScalarRelationFilter = {
-  is?: Prisma.SessionWhereInput | null
-  isNot?: Prisma.SessionWhereInput | null
 }
 
 export type SessionCreateNestedManyWithoutUserInput = {
@@ -679,42 +529,16 @@ export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.SessionScalarWhereInput | Prisma.SessionScalarWhereInput[]
 }
 
-export type NullableEnumDeviceTypeFieldUpdateOperationsInput = {
-  set?: $Enums.DeviceType | null
-}
-
 export type NullableEnumRevokeReasonFieldUpdateOperationsInput = {
   set?: $Enums.RevokeReason | null
 }
 
-export type SessionCreateNestedOneWithoutAuditLogsInput = {
-  create?: Prisma.XOR<Prisma.SessionCreateWithoutAuditLogsInput, Prisma.SessionUncheckedCreateWithoutAuditLogsInput>
-  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutAuditLogsInput
-  connect?: Prisma.SessionWhereUniqueInput
-}
-
-export type SessionUpdateOneWithoutAuditLogsNestedInput = {
-  create?: Prisma.XOR<Prisma.SessionCreateWithoutAuditLogsInput, Prisma.SessionUncheckedCreateWithoutAuditLogsInput>
-  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutAuditLogsInput
-  upsert?: Prisma.SessionUpsertWithoutAuditLogsInput
-  disconnect?: Prisma.SessionWhereInput | boolean
-  delete?: Prisma.SessionWhereInput | boolean
-  connect?: Prisma.SessionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.SessionUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.SessionUpdateWithoutAuditLogsInput>, Prisma.SessionUncheckedUpdateWithoutAuditLogsInput>
-}
-
 export type SessionCreateWithoutUserInput = {
   id?: string
-  refreshTokenHash: string
-  jti?: string | null
-  deviceId?: string | null
-  deviceName?: string | null
-  deviceType?: $Enums.DeviceType | null
-  browser?: string | null
-  os?: string | null
+  refreshToken: string
+  jti: string
+  deviceInfo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipAddress?: string | null
-  ipCountry?: string | null
-  ipCity?: string | null
   userAgent?: string | null
   isActive?: boolean
   revokedAt?: Date | string | null
@@ -722,21 +546,14 @@ export type SessionCreateWithoutUserInput = {
   expiresAt: Date | string
   lastActiveAt?: Date | string
   createdAt?: Date | string
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSessionInput
 }
 
 export type SessionUncheckedCreateWithoutUserInput = {
   id?: string
-  refreshTokenHash: string
-  jti?: string | null
-  deviceId?: string | null
-  deviceName?: string | null
-  deviceType?: $Enums.DeviceType | null
-  browser?: string | null
-  os?: string | null
+  refreshToken: string
+  jti: string
+  deviceInfo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipAddress?: string | null
-  ipCountry?: string | null
-  ipCity?: string | null
   userAgent?: string | null
   isActive?: boolean
   revokedAt?: Date | string | null
@@ -744,7 +561,6 @@ export type SessionUncheckedCreateWithoutUserInput = {
   expiresAt: Date | string
   lastActiveAt?: Date | string
   createdAt?: Date | string
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSessionInput
 }
 
 export type SessionCreateOrConnectWithoutUserInput = {
@@ -779,16 +595,10 @@ export type SessionScalarWhereInput = {
   NOT?: Prisma.SessionScalarWhereInput | Prisma.SessionScalarWhereInput[]
   id?: Prisma.UuidFilter<"Session"> | string
   userId?: Prisma.UuidFilter<"Session"> | string
-  refreshTokenHash?: Prisma.StringFilter<"Session"> | string
-  jti?: Prisma.StringNullableFilter<"Session"> | string | null
-  deviceId?: Prisma.StringNullableFilter<"Session"> | string | null
-  deviceName?: Prisma.StringNullableFilter<"Session"> | string | null
-  deviceType?: Prisma.EnumDeviceTypeNullableFilter<"Session"> | $Enums.DeviceType | null
-  browser?: Prisma.StringNullableFilter<"Session"> | string | null
-  os?: Prisma.StringNullableFilter<"Session"> | string | null
+  refreshToken?: Prisma.StringFilter<"Session"> | string
+  jti?: Prisma.StringFilter<"Session"> | string
+  deviceInfo?: Prisma.JsonNullableFilter<"Session">
   ipAddress?: Prisma.StringNullableFilter<"Session"> | string | null
-  ipCountry?: Prisma.StringNullableFilter<"Session"> | string | null
-  ipCity?: Prisma.StringNullableFilter<"Session"> | string | null
   userAgent?: Prisma.StringNullableFilter<"Session"> | string | null
   isActive?: Prisma.BoolFilter<"Session"> | boolean
   revokedAt?: Prisma.DateTimeNullableFilter<"Session"> | Date | string | null
@@ -798,122 +608,12 @@ export type SessionScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
 }
 
-export type SessionCreateWithoutAuditLogsInput = {
-  id?: string
-  refreshTokenHash: string
-  jti?: string | null
-  deviceId?: string | null
-  deviceName?: string | null
-  deviceType?: $Enums.DeviceType | null
-  browser?: string | null
-  os?: string | null
-  ipAddress?: string | null
-  ipCountry?: string | null
-  ipCity?: string | null
-  userAgent?: string | null
-  isActive?: boolean
-  revokedAt?: Date | string | null
-  revokeReason?: $Enums.RevokeReason | null
-  expiresAt: Date | string
-  lastActiveAt?: Date | string
-  createdAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutSessionsInput
-}
-
-export type SessionUncheckedCreateWithoutAuditLogsInput = {
-  id?: string
-  userId: string
-  refreshTokenHash: string
-  jti?: string | null
-  deviceId?: string | null
-  deviceName?: string | null
-  deviceType?: $Enums.DeviceType | null
-  browser?: string | null
-  os?: string | null
-  ipAddress?: string | null
-  ipCountry?: string | null
-  ipCity?: string | null
-  userAgent?: string | null
-  isActive?: boolean
-  revokedAt?: Date | string | null
-  revokeReason?: $Enums.RevokeReason | null
-  expiresAt: Date | string
-  lastActiveAt?: Date | string
-  createdAt?: Date | string
-}
-
-export type SessionCreateOrConnectWithoutAuditLogsInput = {
-  where: Prisma.SessionWhereUniqueInput
-  create: Prisma.XOR<Prisma.SessionCreateWithoutAuditLogsInput, Prisma.SessionUncheckedCreateWithoutAuditLogsInput>
-}
-
-export type SessionUpsertWithoutAuditLogsInput = {
-  update: Prisma.XOR<Prisma.SessionUpdateWithoutAuditLogsInput, Prisma.SessionUncheckedUpdateWithoutAuditLogsInput>
-  create: Prisma.XOR<Prisma.SessionCreateWithoutAuditLogsInput, Prisma.SessionUncheckedCreateWithoutAuditLogsInput>
-  where?: Prisma.SessionWhereInput
-}
-
-export type SessionUpdateToOneWithWhereWithoutAuditLogsInput = {
-  where?: Prisma.SessionWhereInput
-  data: Prisma.XOR<Prisma.SessionUpdateWithoutAuditLogsInput, Prisma.SessionUncheckedUpdateWithoutAuditLogsInput>
-}
-
-export type SessionUpdateWithoutAuditLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  refreshTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
-  jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceType?: Prisma.NullableEnumDeviceTypeFieldUpdateOperationsInput | $Enums.DeviceType | null
-  browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  os?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  revokeReason?: Prisma.NullableEnumRevokeReasonFieldUpdateOperationsInput | $Enums.RevokeReason | null
-  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lastActiveAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutSessionsNestedInput
-}
-
-export type SessionUncheckedUpdateWithoutAuditLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  refreshTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
-  jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceType?: Prisma.NullableEnumDeviceTypeFieldUpdateOperationsInput | $Enums.DeviceType | null
-  browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  os?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  revokeReason?: Prisma.NullableEnumRevokeReasonFieldUpdateOperationsInput | $Enums.RevokeReason | null
-  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lastActiveAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 export type SessionCreateManyUserInput = {
   id?: string
-  refreshTokenHash: string
-  jti?: string | null
-  deviceId?: string | null
-  deviceName?: string | null
-  deviceType?: $Enums.DeviceType | null
-  browser?: string | null
-  os?: string | null
+  refreshToken: string
+  jti: string
+  deviceInfo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipAddress?: string | null
-  ipCountry?: string | null
-  ipCity?: string | null
   userAgent?: string | null
   isActive?: boolean
   revokedAt?: Date | string | null
@@ -925,16 +625,10 @@ export type SessionCreateManyUserInput = {
 
 export type SessionUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  refreshTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
-  jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceType?: Prisma.NullableEnumDeviceTypeFieldUpdateOperationsInput | $Enums.DeviceType | null
-  browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  os?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refreshToken?: Prisma.StringFieldUpdateOperationsInput | string
+  jti?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceInfo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -942,21 +636,14 @@ export type SessionUpdateWithoutUserInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutSessionNestedInput
 }
 
 export type SessionUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  refreshTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
-  jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceType?: Prisma.NullableEnumDeviceTypeFieldUpdateOperationsInput | $Enums.DeviceType | null
-  browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  os?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refreshToken?: Prisma.StringFieldUpdateOperationsInput | string
+  jti?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceInfo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -964,21 +651,14 @@ export type SessionUncheckedUpdateWithoutUserInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSessionNestedInput
 }
 
 export type SessionUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  refreshTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
-  jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deviceType?: Prisma.NullableEnumDeviceTypeFieldUpdateOperationsInput | $Enums.DeviceType | null
-  browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  os?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refreshToken?: Prisma.StringFieldUpdateOperationsInput | string
+  jti?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceInfo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ipCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -988,50 +668,15 @@ export type SessionUncheckedUpdateManyWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-
-/**
- * Count Type SessionCountOutputType
- */
-
-export type SessionCountOutputType = {
-  auditLogs: number
-}
-
-export type SessionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  auditLogs?: boolean | SessionCountOutputTypeCountAuditLogsArgs
-}
-
-/**
- * SessionCountOutputType without action
- */
-export type SessionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the SessionCountOutputType
-   */
-  select?: Prisma.SessionCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * SessionCountOutputType without action
- */
-export type SessionCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AuditLogWhereInput
-}
 
 
 export type SessionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  refreshTokenHash?: boolean
+  refreshToken?: boolean
   jti?: boolean
-  deviceId?: boolean
-  deviceName?: boolean
-  deviceType?: boolean
-  browser?: boolean
-  os?: boolean
+  deviceInfo?: boolean
   ipAddress?: boolean
-  ipCountry?: boolean
-  ipCity?: boolean
   userAgent?: boolean
   isActive?: boolean
   revokedAt?: boolean
@@ -1040,23 +685,15 @@ export type SessionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   lastActiveAt?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  auditLogs?: boolean | Prisma.Session$auditLogsArgs<ExtArgs>
-  _count?: boolean | Prisma.SessionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["session"]>
 
 export type SessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  refreshTokenHash?: boolean
+  refreshToken?: boolean
   jti?: boolean
-  deviceId?: boolean
-  deviceName?: boolean
-  deviceType?: boolean
-  browser?: boolean
-  os?: boolean
+  deviceInfo?: boolean
   ipAddress?: boolean
-  ipCountry?: boolean
-  ipCity?: boolean
   userAgent?: boolean
   isActive?: boolean
   revokedAt?: boolean
@@ -1070,16 +707,10 @@ export type SessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type SessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  refreshTokenHash?: boolean
+  refreshToken?: boolean
   jti?: boolean
-  deviceId?: boolean
-  deviceName?: boolean
-  deviceType?: boolean
-  browser?: boolean
-  os?: boolean
+  deviceInfo?: boolean
   ipAddress?: boolean
-  ipCountry?: boolean
-  ipCity?: boolean
   userAgent?: boolean
   isActive?: boolean
   revokedAt?: boolean
@@ -1093,16 +724,10 @@ export type SessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type SessionSelectScalar = {
   id?: boolean
   userId?: boolean
-  refreshTokenHash?: boolean
+  refreshToken?: boolean
   jti?: boolean
-  deviceId?: boolean
-  deviceName?: boolean
-  deviceType?: boolean
-  browser?: boolean
-  os?: boolean
+  deviceInfo?: boolean
   ipAddress?: boolean
-  ipCountry?: boolean
-  ipCity?: boolean
   userAgent?: boolean
   isActive?: boolean
   revokedAt?: boolean
@@ -1112,11 +737,9 @@ export type SessionSelectScalar = {
   createdAt?: boolean
 }
 
-export type SessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "refreshTokenHash" | "jti" | "deviceId" | "deviceName" | "deviceType" | "browser" | "os" | "ipAddress" | "ipCountry" | "ipCity" | "userAgent" | "isActive" | "revokedAt" | "revokeReason" | "expiresAt" | "lastActiveAt" | "createdAt", ExtArgs["result"]["session"]>
+export type SessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "refreshToken" | "jti" | "deviceInfo" | "ipAddress" | "userAgent" | "isActive" | "revokedAt" | "revokeReason" | "expiresAt" | "lastActiveAt" | "createdAt", ExtArgs["result"]["session"]>
 export type SessionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  auditLogs?: boolean | Prisma.Session$auditLogsArgs<ExtArgs>
-  _count?: boolean | Prisma.SessionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SessionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1129,21 +752,14 @@ export type $SessionPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Session"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
-    auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
-    refreshTokenHash: string
-    jti: string | null
-    deviceId: string | null
-    deviceName: string | null
-    deviceType: $Enums.DeviceType | null
-    browser: string | null
-    os: string | null
+    refreshToken: string
+    jti: string
+    deviceInfo: runtime.JsonValue | null
     ipAddress: string | null
-    ipCountry: string | null
-    ipCity: string | null
     userAgent: string | null
     isActive: boolean
     revokedAt: Date | null
@@ -1546,7 +1162,6 @@ readonly fields: SessionFieldRefs;
 export interface Prisma__SessionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  auditLogs<T extends Prisma.Session$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Session$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1578,16 +1193,10 @@ export interface Prisma__SessionClient<T, Null = never, ExtArgs extends runtime.
 export interface SessionFieldRefs {
   readonly id: Prisma.FieldRef<"Session", 'String'>
   readonly userId: Prisma.FieldRef<"Session", 'String'>
-  readonly refreshTokenHash: Prisma.FieldRef<"Session", 'String'>
+  readonly refreshToken: Prisma.FieldRef<"Session", 'String'>
   readonly jti: Prisma.FieldRef<"Session", 'String'>
-  readonly deviceId: Prisma.FieldRef<"Session", 'String'>
-  readonly deviceName: Prisma.FieldRef<"Session", 'String'>
-  readonly deviceType: Prisma.FieldRef<"Session", 'DeviceType'>
-  readonly browser: Prisma.FieldRef<"Session", 'String'>
-  readonly os: Prisma.FieldRef<"Session", 'String'>
+  readonly deviceInfo: Prisma.FieldRef<"Session", 'Json'>
   readonly ipAddress: Prisma.FieldRef<"Session", 'String'>
-  readonly ipCountry: Prisma.FieldRef<"Session", 'String'>
-  readonly ipCity: Prisma.FieldRef<"Session", 'String'>
   readonly userAgent: Prisma.FieldRef<"Session", 'String'>
   readonly isActive: Prisma.FieldRef<"Session", 'Boolean'>
   readonly revokedAt: Prisma.FieldRef<"Session", 'DateTime'>
@@ -1993,30 +1602,6 @@ export type SessionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Sessions to delete.
    */
   limit?: number
-}
-
-/**
- * Session.auditLogs
- */
-export type Session$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AuditLog
-   */
-  select?: Prisma.AuditLogSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the AuditLog
-   */
-  omit?: Prisma.AuditLogOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AuditLogInclude<ExtArgs> | null
-  where?: Prisma.AuditLogWhereInput
-  orderBy?: Prisma.AuditLogOrderByWithRelationInput | Prisma.AuditLogOrderByWithRelationInput[]
-  cursor?: Prisma.AuditLogWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AuditLogScalarFieldEnum | Prisma.AuditLogScalarFieldEnum[]
 }
 
 /**

@@ -11,65 +11,31 @@ enum UserStatus {
     deleted
 }
 
-enum AuthType {
+enum AuthProvider {
     local
-    oauth
-    both
-}
-
-enum OAuthProvider {
     google
-    github
-    facebook
 }
 
 enum DeviceType {
     desktop
     mobile
     tablet
+    unknown
 }
 
 enum RevokeReason {
     logout
     logout_all
     password_change
+    password_reset
     admin_revoke
     token_theft
     expired
+    rotated
 }
 
-enum LoyaltyTier {
-    bronze
-    silver
-    gold
-    platinum
-}
-
-enum AuditAction {
-    REGISTER
-    EMAIL_VERIFIED
-    LOGIN
-    LOGIN_FAILED
-    LOGOUT
-    LOGOUT_ALL
-    TOKEN_REFRESH
-    TOKEN_THEFT
-    PASSWORD_CHANGE
-    PASSWORD_RESET_REQUEST
-    PASSWORD_RESET_COMPLETE
-    PROFILE_UPDATE
-    ROLE_CHANGE
-    ACCOUNT_DELETED
-    USER_BANNED
-    USER_UNBANNED
-    GOOGLE_LINKED
-    TWO_FA_ENABLED
-    TWO_FA_DISABLED
-    IMPERSONATION
-    UNAUTHORIZED_ACCESS
-}
-
-enum AuditStatus {
-    success
-    failed
+enum VerificationType {
+    email_verify
+    two_factor
+    password_reset
 }

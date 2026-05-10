@@ -28,28 +28,19 @@ export const UserStatus = {
 export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
 
 
-export const AuthType = {
+export const AuthProvider = {
   local: 'local',
-  oauth: 'oauth',
-  both: 'both'
+  google: 'google'
 } as const
 
-export type AuthType = (typeof AuthType)[keyof typeof AuthType]
-
-
-export const OAuthProvider = {
-  google: 'google',
-  github: 'github',
-  facebook: 'facebook'
-} as const
-
-export type OAuthProvider = (typeof OAuthProvider)[keyof typeof OAuthProvider]
+export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider]
 
 
 export const DeviceType = {
   desktop: 'desktop',
   mobile: 'mobile',
-  tablet: 'tablet'
+  tablet: 'tablet',
+  unknown: 'unknown'
 } as const
 
 export type DeviceType = (typeof DeviceType)[keyof typeof DeviceType]
@@ -59,54 +50,20 @@ export const RevokeReason = {
   logout: 'logout',
   logout_all: 'logout_all',
   password_change: 'password_change',
+  password_reset: 'password_reset',
   admin_revoke: 'admin_revoke',
   token_theft: 'token_theft',
-  expired: 'expired'
+  expired: 'expired',
+  rotated: 'rotated'
 } as const
 
 export type RevokeReason = (typeof RevokeReason)[keyof typeof RevokeReason]
 
 
-export const LoyaltyTier = {
-  bronze: 'bronze',
-  silver: 'silver',
-  gold: 'gold',
-  platinum: 'platinum'
+export const VerificationType = {
+  email_verify: 'email_verify',
+  two_factor: 'two_factor',
+  password_reset: 'password_reset'
 } as const
 
-export type LoyaltyTier = (typeof LoyaltyTier)[keyof typeof LoyaltyTier]
-
-
-export const AuditAction = {
-  REGISTER: 'REGISTER',
-  EMAIL_VERIFIED: 'EMAIL_VERIFIED',
-  LOGIN: 'LOGIN',
-  LOGIN_FAILED: 'LOGIN_FAILED',
-  LOGOUT: 'LOGOUT',
-  LOGOUT_ALL: 'LOGOUT_ALL',
-  TOKEN_REFRESH: 'TOKEN_REFRESH',
-  TOKEN_THEFT: 'TOKEN_THEFT',
-  PASSWORD_CHANGE: 'PASSWORD_CHANGE',
-  PASSWORD_RESET_REQUEST: 'PASSWORD_RESET_REQUEST',
-  PASSWORD_RESET_COMPLETE: 'PASSWORD_RESET_COMPLETE',
-  PROFILE_UPDATE: 'PROFILE_UPDATE',
-  ROLE_CHANGE: 'ROLE_CHANGE',
-  ACCOUNT_DELETED: 'ACCOUNT_DELETED',
-  USER_BANNED: 'USER_BANNED',
-  USER_UNBANNED: 'USER_UNBANNED',
-  GOOGLE_LINKED: 'GOOGLE_LINKED',
-  TWO_FA_ENABLED: 'TWO_FA_ENABLED',
-  TWO_FA_DISABLED: 'TWO_FA_DISABLED',
-  IMPERSONATION: 'IMPERSONATION',
-  UNAUTHORIZED_ACCESS: 'UNAUTHORIZED_ACCESS'
-} as const
-
-export type AuditAction = (typeof AuditAction)[keyof typeof AuditAction]
-
-
-export const AuditStatus = {
-  success: 'success',
-  failed: 'failed'
-} as const
-
-export type AuditStatus = (typeof AuditStatus)[keyof typeof AuditStatus]
+export type VerificationType = (typeof VerificationType)[keyof typeof VerificationType]

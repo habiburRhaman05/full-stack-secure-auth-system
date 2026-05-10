@@ -2,7 +2,6 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    // "rootDir": "./src",
     "outDir": "./dist",
 
     "types": [],
@@ -22,8 +21,7 @@
     "esModuleInterop": true,
   },
   "include": [
-    "src"
-, "../prisma/blog-app/src/utils/mailServices.ts"  ],
+    "src/**/*","tests/**/*"  ],
   "exclude": [
     "node_modules",
     "dist",

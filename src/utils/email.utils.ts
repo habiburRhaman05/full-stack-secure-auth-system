@@ -1,85 +1,69 @@
 import ejs from "ejs";
 import path from "path";
-import { MailType, sendMail } from "./mailServices";
 import bcrypt from "bcrypt";
-
-
-export const emailTypes = {
-  "sent_verify_email":"SENT_VERFY_EMAIL"
-}
+import { type MailType, sendMail } from "./mailServices";
 
 export const EMAIL_CONFIG = {
+  "verify-email": {
+    template: "verify.ejs",
+    subject: "Verify your email address",
+  },
+  "reset-password": {
+    template: "reset.ejs",
+    subject: "Reset your password",
+  },
+  "two-factor": {
+    template: "two-factor.ejs",
+    subject: "Your two-factor authentication code",
+  },
   "payment-success": {
     template: "payment.ejs",
     subject: "Payment Receipt - Blitz Analyzer",
-  },
-
-  "verify-email": {
-    template: "verify.ejs",
-    subject: "Verify Your Email",
-  },
-
-  "reset-password": {
-    template: "reset.ejs",
-    subject: "Reset Your Password",
   },
 } as const;
 
 export type EmailJobName = keyof typeof EMAIL_CONFIG;
 
-
+export const emailTypes = {
+  verifyEmail: "verify-email" as const,
+  resetPassword: "reset-password" as const,
+  twoFactor: "two-factor" as const,
+};
 
 export const renderTemplate = async (
   templateName: string,
-  data: Record<string, any>
-) => {
-  const templatePath = path.join(
-    process.cwd(),
-    "src/templates",
-    templateName
-  );
-
-  return await ejs.renderFile(templatePath, data);
+  data: Record<string, unknown>
+): Promise<string> => {
+  const templatePath = path.join(process.cwd(), "src/templates", templateName);
+  return ejs.renderFile(templatePath, data);
 };
 
 export const buildTemplateData = (
-  jobName: string,
-  data: any
-): Record<string, any> => {
-  const { user, url, ...rest } = data;
-
-  // Auth-related emails
-  if (jobName.includes("verify-email") || jobName.includes("reset")) {
-    console.log(data);
-    
-    return data
-  }
-
-  // Default (payment, etc.)
+  _jobName: string,
+  data: Record<string, unknown>
+): Record<string, unknown> => {
   return data;
 };
 
-export const getRecipientEmail = (data: any) => {
-  return data?.user?.email;
+export const getRecipientEmail = (data: Record<string, unknown>): string | undefined => {
+  const direct = data.email;
+  if (typeof direct === "string") return direct;
+  const nested = (data.user as { email?: string } | undefined)?.email;
+  return nested;
 };
-
-
-
-
-
 
 export const generateOTP = (length = 6): string => {
-  return Math.floor(100000 + Math.random() * 900000).toString();
+  const min = 10 ** (length - 1);
+  const max = 10 ** length;
+  return Math.floor(min + Math.random() * (max - min)).toString();
 };
 
-export const hashOTP = async (otp: string): Promise<string> => {
-  return bcrypt.hash(otp, 10);
-};
+export const hashOTP = async (otp: string): Promise<string> => bcrypt.hash(otp, 10);
 
-export const getExpiry = (minutes: number): Date => {
-  return new Date(Date.now() + minutes * 60 * 1000);
-};
+export const verifyOTP = async (otp: string, hash: string): Promise<boolean> =>
+  bcrypt.compare(otp, hash);
 
+export const getExpiry = (minutes: number): Date => new Date(Date.now() + minutes * 60 * 1000);
 
 interface EmailPayload {
   email: string;
@@ -93,11 +77,5 @@ export const sendEmail = async ({
   subject,
   html,
   type,
-}: EmailPayload) => {
-  return await sendMail({
-    to: email,
-    subject,
-    html,
-    type,
-  });
-};
+}: EmailPayload): Promise<unknown> =>
+  sendMail({ to: email, subject, html, type });

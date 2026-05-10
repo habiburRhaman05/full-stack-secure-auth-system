@@ -52,13 +52,9 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Account: 'Account',
-  OAuthProviderOptions: 'OAuthProviderOptions',
   Session: 'Session',
-  CustomerProfile: 'CustomerProfile',
-  AdminProfile: 'AdminProfile',
-  PasswordHistory: 'PasswordHistory',
-  AuditLog: 'AuditLog'
+  EmailVerification: 'EmailVerification',
+  PasswordReset: 'PasswordReset'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -80,19 +76,19 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  username: 'username',
   email: 'email',
-  country: 'country',
-  city: 'city',
-  timezone: 'timezone',
-  locale: 'locale',
+  password: 'password',
+  emailVerified: 'emailVerified',
+  totpSecret: 'totpSecret',
+  twoFactorEnabled: 'twoFactorEnabled',
+  backupCodes: 'backupCodes',
+  authProvider: 'authProvider',
+  googleId: 'googleId',
   role: 'role',
   status: 'status',
-  banReason: 'banReason',
-  bannedAt: 'bannedAt',
-  deletedAt: 'deletedAt',
-  deletedById: 'deletedById',
+  avatarUrl: 'avatarUrl',
   lastLoginAt: 'lastLoginAt',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -100,67 +96,13 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-export const AccountScalarFieldEnum = {
-  id: 'id',
-  authType: 'authType',
-  passwordHash: 'passwordHash',
-  passwordChangedAt: 'passwordChangedAt',
-  isEmailVerified: 'isEmailVerified',
-  emailVerifiedAt: 'emailVerifiedAt',
-  emailOtpHash: 'emailOtpHash',
-  emailOtpExpiresAt: 'emailOtpExpiresAt',
-  emailOtpAttempts: 'emailOtpAttempts',
-  emailOtpLastSentAt: 'emailOtpLastSentAt',
-  resetTokenHash: 'resetTokenHash',
-  resetTokenExpiresAt: 'resetTokenExpiresAt',
-  resetRequestedAt: 'resetRequestedAt',
-  is2faEnabled: 'is2faEnabled',
-  totpSecret: 'totpSecret',
-  totpEnabledAt: 'totpEnabledAt',
-  backupCodes: 'backupCodes',
-  failedLoginAttempts: 'failedLoginAttempts',
-  lastFailedLoginAt: 'lastFailedLoginAt',
-  lockoutUntil: 'lockoutUntil',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
-
-
-export const OAuthProviderOptionsScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  provider: 'provider',
-  providerUserId: 'providerUserId',
-  providerEmail: 'providerEmail',
-  providerName: 'providerName',
-  providerAvatar: 'providerAvatar',
-  accessToken: 'accessToken',
-  refreshToken: 'refreshToken',
-  tokenExpiresAt: 'tokenExpiresAt',
-  scopes: 'scopes',
-  linkedAt: 'linkedAt',
-  lastUsedAt: 'lastUsedAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type OAuthProviderOptionsScalarFieldEnum = (typeof OAuthProviderOptionsScalarFieldEnum)[keyof typeof OAuthProviderOptionsScalarFieldEnum]
-
-
 export const SessionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  refreshTokenHash: 'refreshTokenHash',
+  refreshToken: 'refreshToken',
   jti: 'jti',
-  deviceId: 'deviceId',
-  deviceName: 'deviceName',
-  deviceType: 'deviceType',
-  browser: 'browser',
-  os: 'os',
+  deviceInfo: 'deviceInfo',
   ipAddress: 'ipAddress',
-  ipCountry: 'ipCountry',
-  ipCity: 'ipCity',
   userAgent: 'userAgent',
   isActive: 'isActive',
   revokedAt: 'revokedAt',
@@ -173,64 +115,31 @@ export const SessionScalarFieldEnum = {
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
-export const CustomerProfileScalarFieldEnum = {
-  userId: 'userId',
-  avatarUrl: 'avatarUrl',
-  bio: 'bio',
-  phoneNumber: 'phoneNumber',
-  phoneVerified: 'phoneVerified',
-  dateOfBirth: 'dateOfBirth',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type CustomerProfileScalarFieldEnum = (typeof CustomerProfileScalarFieldEnum)[keyof typeof CustomerProfileScalarFieldEnum]
-
-
-export const AdminProfileScalarFieldEnum = {
-  userId: 'userId',
-  department: 'department',
-  jobTitle: 'jobTitle',
-  employeeId: 'employeeId',
-  permissions: 'permissions',
-  canImpersonate: 'canImpersonate',
-  accessLevel: 'accessLevel',
-  require2fa: 'require2fa',
-  lastPermissionReviewAt: 'lastPermissionReviewAt',
-  notes: 'notes',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type AdminProfileScalarFieldEnum = (typeof AdminProfileScalarFieldEnum)[keyof typeof AdminProfileScalarFieldEnum]
-
-
-export const PasswordHistoryScalarFieldEnum = {
+export const EmailVerificationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  passwordHash: 'passwordHash',
+  type: 'type',
+  otp: 'otp',
+  token: 'token',
+  used: 'used',
+  attempts: 'attempts',
+  expiresAt: 'expiresAt',
   createdAt: 'createdAt'
 } as const
 
-export type PasswordHistoryScalarFieldEnum = (typeof PasswordHistoryScalarFieldEnum)[keyof typeof PasswordHistoryScalarFieldEnum]
+export type EmailVerificationScalarFieldEnum = (typeof EmailVerificationScalarFieldEnum)[keyof typeof EmailVerificationScalarFieldEnum]
 
 
-export const AuditLogScalarFieldEnum = {
+export const PasswordResetScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  sessionId: 'sessionId',
-  actedById: 'actedById',
-  action: 'action',
-  status: 'status',
-  failReason: 'failReason',
-  ipAddress: 'ipAddress',
-  userAgent: 'userAgent',
-  country: 'country',
-  metadata: 'metadata',
+  token: 'token',
+  used: 'used',
+  expiresAt: 'expiresAt',
   createdAt: 'createdAt'
 } as const
 
-export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+export type PasswordResetScalarFieldEnum = (typeof PasswordResetScalarFieldEnum)[keyof typeof PasswordResetScalarFieldEnum]
 
 
 export const SortOrder = {

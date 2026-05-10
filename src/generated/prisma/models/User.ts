@@ -27,19 +27,18 @@ export type AggregateUser = {
 export type UserMinAggregateOutputType = {
   id: string | null
   name: string | null
-  username: string | null
   email: string | null
-  country: string | null
-  city: string | null
-  timezone: string | null
-  locale: string | null
+  password: string | null
+  emailVerified: boolean | null
+  totpSecret: string | null
+  twoFactorEnabled: boolean | null
+  authProvider: $Enums.AuthProvider | null
+  googleId: string | null
   role: $Enums.UserRole | null
   status: $Enums.UserStatus | null
-  banReason: string | null
-  bannedAt: Date | null
-  deletedAt: Date | null
-  deletedById: string | null
+  avatarUrl: string | null
   lastLoginAt: Date | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -47,19 +46,18 @@ export type UserMinAggregateOutputType = {
 export type UserMaxAggregateOutputType = {
   id: string | null
   name: string | null
-  username: string | null
   email: string | null
-  country: string | null
-  city: string | null
-  timezone: string | null
-  locale: string | null
+  password: string | null
+  emailVerified: boolean | null
+  totpSecret: string | null
+  twoFactorEnabled: boolean | null
+  authProvider: $Enums.AuthProvider | null
+  googleId: string | null
   role: $Enums.UserRole | null
   status: $Enums.UserStatus | null
-  banReason: string | null
-  bannedAt: Date | null
-  deletedAt: Date | null
-  deletedById: string | null
+  avatarUrl: string | null
   lastLoginAt: Date | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -67,19 +65,19 @@ export type UserMaxAggregateOutputType = {
 export type UserCountAggregateOutputType = {
   id: number
   name: number
-  username: number
   email: number
-  country: number
-  city: number
-  timezone: number
-  locale: number
+  password: number
+  emailVerified: number
+  totpSecret: number
+  twoFactorEnabled: number
+  backupCodes: number
+  authProvider: number
+  googleId: number
   role: number
   status: number
-  banReason: number
-  bannedAt: number
-  deletedAt: number
-  deletedById: number
+  avatarUrl: number
   lastLoginAt: number
+  deletedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -89,19 +87,18 @@ export type UserCountAggregateOutputType = {
 export type UserMinAggregateInputType = {
   id?: true
   name?: true
-  username?: true
   email?: true
-  country?: true
-  city?: true
-  timezone?: true
-  locale?: true
+  password?: true
+  emailVerified?: true
+  totpSecret?: true
+  twoFactorEnabled?: true
+  authProvider?: true
+  googleId?: true
   role?: true
   status?: true
-  banReason?: true
-  bannedAt?: true
-  deletedAt?: true
-  deletedById?: true
+  avatarUrl?: true
   lastLoginAt?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -109,19 +106,18 @@ export type UserMinAggregateInputType = {
 export type UserMaxAggregateInputType = {
   id?: true
   name?: true
-  username?: true
   email?: true
-  country?: true
-  city?: true
-  timezone?: true
-  locale?: true
+  password?: true
+  emailVerified?: true
+  totpSecret?: true
+  twoFactorEnabled?: true
+  authProvider?: true
+  googleId?: true
   role?: true
   status?: true
-  banReason?: true
-  bannedAt?: true
-  deletedAt?: true
-  deletedById?: true
+  avatarUrl?: true
   lastLoginAt?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -129,19 +125,19 @@ export type UserMaxAggregateInputType = {
 export type UserCountAggregateInputType = {
   id?: true
   name?: true
-  username?: true
   email?: true
-  country?: true
-  city?: true
-  timezone?: true
-  locale?: true
+  password?: true
+  emailVerified?: true
+  totpSecret?: true
+  twoFactorEnabled?: true
+  backupCodes?: true
+  authProvider?: true
+  googleId?: true
   role?: true
   status?: true
-  banReason?: true
-  bannedAt?: true
-  deletedAt?: true
-  deletedById?: true
+  avatarUrl?: true
   lastLoginAt?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -222,19 +218,19 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UserGroupByOutputType = {
   id: string
   name: string
-  username: string | null
   email: string
-  country: string | null
-  city: string | null
-  timezone: string | null
-  locale: string
+  password: string | null
+  emailVerified: boolean
+  totpSecret: string | null
+  twoFactorEnabled: boolean
+  backupCodes: string[]
+  authProvider: $Enums.AuthProvider
+  googleId: string | null
   role: $Enums.UserRole
   status: $Enums.UserStatus
-  banReason: string | null
-  bannedAt: Date | null
-  deletedAt: Date | null
-  deletedById: string | null
+  avatarUrl: string | null
   lastLoginAt: Date | null
+  deletedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -263,112 +259,91 @@ export type UserWhereInput = {
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.UuidFilter<"User"> | string
   name?: Prisma.StringFilter<"User"> | string
-  username?: Prisma.StringNullableFilter<"User"> | string | null
   email?: Prisma.StringFilter<"User"> | string
-  country?: Prisma.StringNullableFilter<"User"> | string | null
-  city?: Prisma.StringNullableFilter<"User"> | string | null
-  timezone?: Prisma.StringNullableFilter<"User"> | string | null
-  locale?: Prisma.StringFilter<"User"> | string
+  password?: Prisma.StringNullableFilter<"User"> | string | null
+  emailVerified?: Prisma.BoolFilter<"User"> | boolean
+  totpSecret?: Prisma.StringNullableFilter<"User"> | string | null
+  twoFactorEnabled?: Prisma.BoolFilter<"User"> | boolean
+  backupCodes?: Prisma.StringNullableListFilter<"User">
+  authProvider?: Prisma.EnumAuthProviderFilter<"User"> | $Enums.AuthProvider
+  googleId?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
-  banReason?: Prisma.StringNullableFilter<"User"> | string | null
-  bannedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  deletedById?: Prisma.UuidNullableFilter<"User"> | string | null
+  avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  account?: Prisma.XOR<Prisma.AccountNullableScalarRelationFilter, Prisma.AccountWhereInput> | null
-  oauthProviders?: Prisma.OAuthProviderOptionsListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
-  customerProfile?: Prisma.XOR<Prisma.CustomerProfileNullableScalarRelationFilter, Prisma.CustomerProfileWhereInput> | null
-  adminProfile?: Prisma.XOR<Prisma.AdminProfileNullableScalarRelationFilter, Prisma.AdminProfileWhereInput> | null
-  passwordHistory?: Prisma.PasswordHistoryListRelationFilter
-  deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  deletedUsers?: Prisma.UserListRelationFilter
-  auditLogs?: Prisma.AuditLogListRelationFilter
-  auditActedBy?: Prisma.AuditLogListRelationFilter
+  emailVerifications?: Prisma.EmailVerificationListRelationFilter
+  passwordResets?: Prisma.PasswordResetListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  username?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
-  country?: Prisma.SortOrderInput | Prisma.SortOrder
-  city?: Prisma.SortOrderInput | Prisma.SortOrder
-  timezone?: Prisma.SortOrderInput | Prisma.SortOrder
-  locale?: Prisma.SortOrder
+  password?: Prisma.SortOrderInput | Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  totpSecret?: Prisma.SortOrderInput | Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
+  backupCodes?: Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
+  googleId?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  banReason?: Prisma.SortOrderInput | Prisma.SortOrder
-  bannedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  account?: Prisma.AccountOrderByWithRelationInput
-  oauthProviders?: Prisma.OAuthProviderOptionsOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
-  customerProfile?: Prisma.CustomerProfileOrderByWithRelationInput
-  adminProfile?: Prisma.AdminProfileOrderByWithRelationInput
-  passwordHistory?: Prisma.PasswordHistoryOrderByRelationAggregateInput
-  deletedBy?: Prisma.UserOrderByWithRelationInput
-  deletedUsers?: Prisma.UserOrderByRelationAggregateInput
-  auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
-  auditActedBy?: Prisma.AuditLogOrderByRelationAggregateInput
+  emailVerifications?: Prisma.EmailVerificationOrderByRelationAggregateInput
+  passwordResets?: Prisma.PasswordResetOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  username?: string
   email?: string
+  googleId?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringFilter<"User"> | string
-  country?: Prisma.StringNullableFilter<"User"> | string | null
-  city?: Prisma.StringNullableFilter<"User"> | string | null
-  timezone?: Prisma.StringNullableFilter<"User"> | string | null
-  locale?: Prisma.StringFilter<"User"> | string
+  password?: Prisma.StringNullableFilter<"User"> | string | null
+  emailVerified?: Prisma.BoolFilter<"User"> | boolean
+  totpSecret?: Prisma.StringNullableFilter<"User"> | string | null
+  twoFactorEnabled?: Prisma.BoolFilter<"User"> | boolean
+  backupCodes?: Prisma.StringNullableListFilter<"User">
+  authProvider?: Prisma.EnumAuthProviderFilter<"User"> | $Enums.AuthProvider
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
-  banReason?: Prisma.StringNullableFilter<"User"> | string | null
-  bannedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  deletedById?: Prisma.UuidNullableFilter<"User"> | string | null
+  avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  account?: Prisma.XOR<Prisma.AccountNullableScalarRelationFilter, Prisma.AccountWhereInput> | null
-  oauthProviders?: Prisma.OAuthProviderOptionsListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
-  customerProfile?: Prisma.XOR<Prisma.CustomerProfileNullableScalarRelationFilter, Prisma.CustomerProfileWhereInput> | null
-  adminProfile?: Prisma.XOR<Prisma.AdminProfileNullableScalarRelationFilter, Prisma.AdminProfileWhereInput> | null
-  passwordHistory?: Prisma.PasswordHistoryListRelationFilter
-  deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  deletedUsers?: Prisma.UserListRelationFilter
-  auditLogs?: Prisma.AuditLogListRelationFilter
-  auditActedBy?: Prisma.AuditLogListRelationFilter
-}, "id" | "username" | "email">
+  emailVerifications?: Prisma.EmailVerificationListRelationFilter
+  passwordResets?: Prisma.PasswordResetListRelationFilter
+}, "id" | "email" | "googleId">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  username?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
-  country?: Prisma.SortOrderInput | Prisma.SortOrder
-  city?: Prisma.SortOrderInput | Prisma.SortOrder
-  timezone?: Prisma.SortOrderInput | Prisma.SortOrder
-  locale?: Prisma.SortOrder
+  password?: Prisma.SortOrderInput | Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  totpSecret?: Prisma.SortOrderInput | Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
+  backupCodes?: Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
+  googleId?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  banReason?: Prisma.SortOrderInput | Prisma.SortOrder
-  bannedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -382,19 +357,19 @@ export type UserScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"User"> | string
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
-  username?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
-  country?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  city?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  timezone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  locale?: Prisma.StringWithAggregatesFilter<"User"> | string
+  password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  emailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  totpSecret?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  twoFactorEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  backupCodes?: Prisma.StringNullableListFilter<"User">
+  authProvider?: Prisma.EnumAuthProviderWithAggregatesFilter<"User"> | $Enums.AuthProvider
+  googleId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
-  banReason?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  bannedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-  deletedById?: Prisma.UuidNullableWithAggregatesFilter<"User"> | string | null
+  avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   lastLoginAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -402,135 +377,111 @@ export type UserScalarWhereWithAggregatesInput = {
 export type UserCreateInput = {
   id?: string
   name: string
-  username?: string | null
   email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
+  password?: string | null
+  emailVerified?: boolean
+  totpSecret?: string | null
+  twoFactorEnabled?: boolean
+  backupCodes?: Prisma.UserCreatebackupCodesInput | string[]
+  authProvider?: $Enums.AuthProvider
+  googleId?: string | null
   role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
   lastLoginAt?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  account?: Prisma.AccountCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryCreateNestedManyWithoutUserInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedUsersInput
-  deletedUsers?: Prisma.UserCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogCreateNestedManyWithoutActedByInput
+  emailVerifications?: Prisma.EmailVerificationCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
   id?: string
   name: string
-  username?: string | null
   email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
+  password?: string | null
+  emailVerified?: boolean
+  totpSecret?: string | null
+  twoFactorEnabled?: boolean
+  backupCodes?: Prisma.UserCreatebackupCodesInput | string[]
+  authProvider?: $Enums.AuthProvider
+  googleId?: string | null
   role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  deletedById?: string | null
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
   lastLoginAt?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  account?: Prisma.AccountUncheckedCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileUncheckedCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileUncheckedCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedCreateNestedManyWithoutUserInput
-  deletedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActedByInput
+  emailVerifications?: Prisma.EmailVerificationUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  backupCodes?: Prisma.UserUpdatebackupCodesInput | string[]
+  authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUpdateManyWithoutUserNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedUsersNestedInput
-  deletedUsers?: Prisma.UserUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUpdateManyWithoutActedByNestedInput
+  emailVerifications?: Prisma.EmailVerificationUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  backupCodes?: Prisma.UserUpdatebackupCodesInput | string[]
+  authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUncheckedUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUncheckedUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUncheckedUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedUpdateManyWithoutUserNestedInput
-  deletedUsers?: Prisma.UserUncheckedUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUncheckedUpdateManyWithoutActedByNestedInput
+  emailVerifications?: Prisma.EmailVerificationUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
   id?: string
   name: string
-  username?: string | null
   email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
+  password?: string | null
+  emailVerified?: boolean
+  totpSecret?: string | null
+  twoFactorEnabled?: boolean
+  backupCodes?: Prisma.UserCreatebackupCodesInput | string[]
+  authProvider?: $Enums.AuthProvider
+  googleId?: string | null
   role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  deletedById?: string | null
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
   lastLoginAt?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -538,18 +489,19 @@ export type UserCreateManyInput = {
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  backupCodes?: Prisma.UserUpdatebackupCodesInput | string[]
+  authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -557,54 +509,47 @@ export type UserUpdateManyMutationInput = {
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  backupCodes?: Prisma.UserUpdatebackupCodesInput | string[]
+  authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type UserNullableScalarRelationFilter = {
-  is?: Prisma.UserWhereInput | null
-  isNot?: Prisma.UserWhereInput | null
-}
-
-export type UserListRelationFilter = {
-  every?: Prisma.UserWhereInput
-  some?: Prisma.UserWhereInput
-  none?: Prisma.UserWhereInput
-}
-
-export type UserOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
 }
 
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  username?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  country?: Prisma.SortOrder
-  city?: Prisma.SortOrder
-  timezone?: Prisma.SortOrder
-  locale?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  totpSecret?: Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
+  backupCodes?: Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
+  googleId?: Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  banReason?: Prisma.SortOrder
-  bannedAt?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
-  deletedById?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -612,19 +557,18 @@ export type UserCountOrderByAggregateInput = {
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  username?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  country?: Prisma.SortOrder
-  city?: Prisma.SortOrder
-  timezone?: Prisma.SortOrder
-  locale?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  totpSecret?: Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
+  googleId?: Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  banReason?: Prisma.SortOrder
-  bannedAt?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
-  deletedById?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -632,19 +576,18 @@ export type UserMaxOrderByAggregateInput = {
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  username?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  country?: Prisma.SortOrder
-  city?: Prisma.SortOrder
-  timezone?: Prisma.SortOrder
-  locale?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  totpSecret?: Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
+  googleId?: Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  banReason?: Prisma.SortOrder
-  bannedAt?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
-  deletedById?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -654,24 +597,8 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
-export type UserCreateNestedOneWithoutDeletedUsersInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutDeletedUsersInput, Prisma.UserUncheckedCreateWithoutDeletedUsersInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDeletedUsersInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserCreateNestedManyWithoutDeletedByInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutDeletedByInput, Prisma.UserUncheckedCreateWithoutDeletedByInput> | Prisma.UserCreateWithoutDeletedByInput[] | Prisma.UserUncheckedCreateWithoutDeletedByInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDeletedByInput | Prisma.UserCreateOrConnectWithoutDeletedByInput[]
-  createMany?: Prisma.UserCreateManyDeletedByInputEnvelope
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-}
-
-export type UserUncheckedCreateNestedManyWithoutDeletedByInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutDeletedByInput, Prisma.UserUncheckedCreateWithoutDeletedByInput> | Prisma.UserCreateWithoutDeletedByInput[] | Prisma.UserUncheckedCreateWithoutDeletedByInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDeletedByInput | Prisma.UserCreateOrConnectWithoutDeletedByInput[]
-  createMany?: Prisma.UserCreateManyDeletedByInputEnvelope
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+export type UserCreatebackupCodesInput = {
+  set: string[]
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -680,6 +607,19 @@ export type StringFieldUpdateOperationsInput = {
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type UserUpdatebackupCodesInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type EnumAuthProviderFieldUpdateOperationsInput = {
+  set?: $Enums.AuthProvider
 }
 
 export type EnumUserRoleFieldUpdateOperationsInput = {
@@ -698,72 +638,6 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
-export type UserUpdateOneWithoutDeletedUsersNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutDeletedUsersInput, Prisma.UserUncheckedCreateWithoutDeletedUsersInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDeletedUsersInput
-  upsert?: Prisma.UserUpsertWithoutDeletedUsersInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDeletedUsersInput, Prisma.UserUpdateWithoutDeletedUsersInput>, Prisma.UserUncheckedUpdateWithoutDeletedUsersInput>
-}
-
-export type UserUpdateManyWithoutDeletedByNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutDeletedByInput, Prisma.UserUncheckedCreateWithoutDeletedByInput> | Prisma.UserCreateWithoutDeletedByInput[] | Prisma.UserUncheckedCreateWithoutDeletedByInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDeletedByInput | Prisma.UserCreateOrConnectWithoutDeletedByInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutDeletedByInput | Prisma.UserUpsertWithWhereUniqueWithoutDeletedByInput[]
-  createMany?: Prisma.UserCreateManyDeletedByInputEnvelope
-  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutDeletedByInput | Prisma.UserUpdateWithWhereUniqueWithoutDeletedByInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutDeletedByInput | Prisma.UserUpdateManyWithWhereWithoutDeletedByInput[]
-  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-}
-
-export type UserUncheckedUpdateManyWithoutDeletedByNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutDeletedByInput, Prisma.UserUncheckedCreateWithoutDeletedByInput> | Prisma.UserCreateWithoutDeletedByInput[] | Prisma.UserUncheckedCreateWithoutDeletedByInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDeletedByInput | Prisma.UserCreateOrConnectWithoutDeletedByInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutDeletedByInput | Prisma.UserUpsertWithWhereUniqueWithoutDeletedByInput[]
-  createMany?: Prisma.UserCreateManyDeletedByInputEnvelope
-  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutDeletedByInput | Prisma.UserUpdateWithWhereUniqueWithoutDeletedByInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutDeletedByInput | Prisma.UserUpdateManyWithWhereWithoutDeletedByInput[]
-  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-}
-
-export type UserCreateNestedOneWithoutAccountInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountInput, Prisma.UserUncheckedCreateWithoutAccountInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutAccountNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountInput, Prisma.UserUncheckedCreateWithoutAccountInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountInput
-  upsert?: Prisma.UserUpsertWithoutAccountInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountInput, Prisma.UserUpdateWithoutAccountInput>, Prisma.UserUncheckedUpdateWithoutAccountInput>
-}
-
-export type UserCreateNestedOneWithoutOauthProvidersInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutOauthProvidersInput, Prisma.UserUncheckedCreateWithoutOauthProvidersInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOauthProvidersInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutOauthProvidersNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutOauthProvidersInput, Prisma.UserUncheckedCreateWithoutOauthProvidersInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOauthProvidersInput
-  upsert?: Prisma.UserUpsertWithoutOauthProvidersInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOauthProvidersInput, Prisma.UserUpdateWithoutOauthProvidersInput>, Prisma.UserUncheckedUpdateWithoutOauthProvidersInput>
-}
-
 export type UserCreateNestedOneWithoutSessionsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
@@ -778,623 +652,76 @@ export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
 }
 
-export type UserCreateNestedOneWithoutCustomerProfileInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCustomerProfileInput, Prisma.UserUncheckedCreateWithoutCustomerProfileInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCustomerProfileInput
+export type UserCreateNestedOneWithoutEmailVerificationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEmailVerificationsInput, Prisma.UserUncheckedCreateWithoutEmailVerificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEmailVerificationsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutCustomerProfileNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCustomerProfileInput, Prisma.UserUncheckedCreateWithoutCustomerProfileInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCustomerProfileInput
-  upsert?: Prisma.UserUpsertWithoutCustomerProfileInput
+export type UserUpdateOneRequiredWithoutEmailVerificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEmailVerificationsInput, Prisma.UserUncheckedCreateWithoutEmailVerificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEmailVerificationsInput
+  upsert?: Prisma.UserUpsertWithoutEmailVerificationsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCustomerProfileInput, Prisma.UserUpdateWithoutCustomerProfileInput>, Prisma.UserUncheckedUpdateWithoutCustomerProfileInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEmailVerificationsInput, Prisma.UserUpdateWithoutEmailVerificationsInput>, Prisma.UserUncheckedUpdateWithoutEmailVerificationsInput>
 }
 
-export type UserCreateNestedOneWithoutAdminProfileInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAdminProfileInput, Prisma.UserUncheckedCreateWithoutAdminProfileInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAdminProfileInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutAdminProfileNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAdminProfileInput, Prisma.UserUncheckedCreateWithoutAdminProfileInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAdminProfileInput
-  upsert?: Prisma.UserUpsertWithoutAdminProfileInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAdminProfileInput, Prisma.UserUpdateWithoutAdminProfileInput>, Prisma.UserUncheckedUpdateWithoutAdminProfileInput>
-}
-
-export type UserCreateNestedOneWithoutPasswordHistoryInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutPasswordHistoryInput, Prisma.UserUncheckedCreateWithoutPasswordHistoryInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPasswordHistoryInput
+export type UserCreateNestedOneWithoutPasswordResetsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetsInput, Prisma.UserUncheckedCreateWithoutPasswordResetsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPasswordResetsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutPasswordHistoryNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutPasswordHistoryInput, Prisma.UserUncheckedCreateWithoutPasswordHistoryInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPasswordHistoryInput
-  upsert?: Prisma.UserUpsertWithoutPasswordHistoryInput
+export type UserUpdateOneRequiredWithoutPasswordResetsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetsInput, Prisma.UserUncheckedCreateWithoutPasswordResetsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPasswordResetsInput
+  upsert?: Prisma.UserUpsertWithoutPasswordResetsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPasswordHistoryInput, Prisma.UserUpdateWithoutPasswordHistoryInput>, Prisma.UserUncheckedUpdateWithoutPasswordHistoryInput>
-}
-
-export type UserCreateNestedOneWithoutAuditLogsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAuditLogsInput, Prisma.UserUncheckedCreateWithoutAuditLogsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuditLogsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserCreateNestedOneWithoutAuditActedByInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAuditActedByInput, Prisma.UserUncheckedCreateWithoutAuditActedByInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuditActedByInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneWithoutAuditLogsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAuditLogsInput, Prisma.UserUncheckedCreateWithoutAuditLogsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuditLogsInput
-  upsert?: Prisma.UserUpsertWithoutAuditLogsInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.UserUpdateWithoutAuditLogsInput>, Prisma.UserUncheckedUpdateWithoutAuditLogsInput>
-}
-
-export type UserUpdateOneWithoutAuditActedByNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAuditActedByInput, Prisma.UserUncheckedCreateWithoutAuditActedByInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuditActedByInput
-  upsert?: Prisma.UserUpsertWithoutAuditActedByInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuditActedByInput, Prisma.UserUpdateWithoutAuditActedByInput>, Prisma.UserUncheckedUpdateWithoutAuditActedByInput>
-}
-
-export type UserCreateWithoutDeletedUsersInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  account?: Prisma.AccountCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryCreateNestedManyWithoutUserInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedUsersInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogCreateNestedManyWithoutActedByInput
-}
-
-export type UserUncheckedCreateWithoutDeletedUsersInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  deletedById?: string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  account?: Prisma.AccountUncheckedCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileUncheckedCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileUncheckedCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedCreateNestedManyWithoutUserInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActedByInput
-}
-
-export type UserCreateOrConnectWithoutDeletedUsersInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutDeletedUsersInput, Prisma.UserUncheckedCreateWithoutDeletedUsersInput>
-}
-
-export type UserCreateWithoutDeletedByInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  account?: Prisma.AccountCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryCreateNestedManyWithoutUserInput
-  deletedUsers?: Prisma.UserCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogCreateNestedManyWithoutActedByInput
-}
-
-export type UserUncheckedCreateWithoutDeletedByInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  account?: Prisma.AccountUncheckedCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileUncheckedCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileUncheckedCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedCreateNestedManyWithoutUserInput
-  deletedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActedByInput
-}
-
-export type UserCreateOrConnectWithoutDeletedByInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutDeletedByInput, Prisma.UserUncheckedCreateWithoutDeletedByInput>
-}
-
-export type UserCreateManyDeletedByInputEnvelope = {
-  data: Prisma.UserCreateManyDeletedByInput | Prisma.UserCreateManyDeletedByInput[]
-  skipDuplicates?: boolean
-}
-
-export type UserUpsertWithoutDeletedUsersInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutDeletedUsersInput, Prisma.UserUncheckedUpdateWithoutDeletedUsersInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutDeletedUsersInput, Prisma.UserUncheckedCreateWithoutDeletedUsersInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutDeletedUsersInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutDeletedUsersInput, Prisma.UserUncheckedUpdateWithoutDeletedUsersInput>
-}
-
-export type UserUpdateWithoutDeletedUsersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUpdateManyWithoutUserNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedUsersNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUpdateManyWithoutActedByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutDeletedUsersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUncheckedUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUncheckedUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUncheckedUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedUpdateManyWithoutUserNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUncheckedUpdateManyWithoutActedByNestedInput
-}
-
-export type UserUpsertWithWhereUniqueWithoutDeletedByInput = {
-  where: Prisma.UserWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserUpdateWithoutDeletedByInput, Prisma.UserUncheckedUpdateWithoutDeletedByInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutDeletedByInput, Prisma.UserUncheckedCreateWithoutDeletedByInput>
-}
-
-export type UserUpdateWithWhereUniqueWithoutDeletedByInput = {
-  where: Prisma.UserWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutDeletedByInput, Prisma.UserUncheckedUpdateWithoutDeletedByInput>
-}
-
-export type UserUpdateManyWithWhereWithoutDeletedByInput = {
-  where: Prisma.UserScalarWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutDeletedByInput>
-}
-
-export type UserScalarWhereInput = {
-  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-  OR?: Prisma.UserScalarWhereInput[]
-  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-  id?: Prisma.UuidFilter<"User"> | string
-  name?: Prisma.StringFilter<"User"> | string
-  username?: Prisma.StringNullableFilter<"User"> | string | null
-  email?: Prisma.StringFilter<"User"> | string
-  country?: Prisma.StringNullableFilter<"User"> | string | null
-  city?: Prisma.StringNullableFilter<"User"> | string | null
-  timezone?: Prisma.StringNullableFilter<"User"> | string | null
-  locale?: Prisma.StringFilter<"User"> | string
-  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
-  banReason?: Prisma.StringNullableFilter<"User"> | string | null
-  bannedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  deletedById?: Prisma.UuidNullableFilter<"User"> | string | null
-  lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-}
-
-export type UserCreateWithoutAccountInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  oauthProviders?: Prisma.OAuthProviderOptionsCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryCreateNestedManyWithoutUserInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedUsersInput
-  deletedUsers?: Prisma.UserCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogCreateNestedManyWithoutActedByInput
-}
-
-export type UserUncheckedCreateWithoutAccountInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  deletedById?: string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileUncheckedCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileUncheckedCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedCreateNestedManyWithoutUserInput
-  deletedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActedByInput
-}
-
-export type UserCreateOrConnectWithoutAccountInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutAccountInput, Prisma.UserUncheckedCreateWithoutAccountInput>
-}
-
-export type UserUpsertWithoutAccountInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutAccountInput, Prisma.UserUncheckedUpdateWithoutAccountInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutAccountInput, Prisma.UserUncheckedCreateWithoutAccountInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutAccountInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutAccountInput, Prisma.UserUncheckedUpdateWithoutAccountInput>
-}
-
-export type UserUpdateWithoutAccountInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  oauthProviders?: Prisma.OAuthProviderOptionsUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUpdateManyWithoutUserNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedUsersNestedInput
-  deletedUsers?: Prisma.UserUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUpdateManyWithoutActedByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutAccountInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUncheckedUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUncheckedUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedUpdateManyWithoutUserNestedInput
-  deletedUsers?: Prisma.UserUncheckedUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUncheckedUpdateManyWithoutActedByNestedInput
-}
-
-export type UserCreateWithoutOauthProvidersInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  account?: Prisma.AccountCreateNestedOneWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryCreateNestedManyWithoutUserInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedUsersInput
-  deletedUsers?: Prisma.UserCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogCreateNestedManyWithoutActedByInput
-}
-
-export type UserUncheckedCreateWithoutOauthProvidersInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  deletedById?: string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  account?: Prisma.AccountUncheckedCreateNestedOneWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileUncheckedCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileUncheckedCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedCreateNestedManyWithoutUserInput
-  deletedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActedByInput
-}
-
-export type UserCreateOrConnectWithoutOauthProvidersInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutOauthProvidersInput, Prisma.UserUncheckedCreateWithoutOauthProvidersInput>
-}
-
-export type UserUpsertWithoutOauthProvidersInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutOauthProvidersInput, Prisma.UserUncheckedUpdateWithoutOauthProvidersInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutOauthProvidersInput, Prisma.UserUncheckedCreateWithoutOauthProvidersInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutOauthProvidersInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutOauthProvidersInput, Prisma.UserUncheckedUpdateWithoutOauthProvidersInput>
-}
-
-export type UserUpdateWithoutOauthProvidersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUpdateOneWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUpdateManyWithoutUserNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedUsersNestedInput
-  deletedUsers?: Prisma.UserUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUpdateManyWithoutActedByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutOauthProvidersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUncheckedUpdateOneWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUncheckedUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUncheckedUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedUpdateManyWithoutUserNestedInput
-  deletedUsers?: Prisma.UserUncheckedUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUncheckedUpdateManyWithoutActedByNestedInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPasswordResetsInput, Prisma.UserUpdateWithoutPasswordResetsInput>, Prisma.UserUncheckedUpdateWithoutPasswordResetsInput>
 }
 
 export type UserCreateWithoutSessionsInput = {
   id?: string
   name: string
-  username?: string | null
   email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
+  password?: string | null
+  emailVerified?: boolean
+  totpSecret?: string | null
+  twoFactorEnabled?: boolean
+  backupCodes?: Prisma.UserCreatebackupCodesInput | string[]
+  authProvider?: $Enums.AuthProvider
+  googleId?: string | null
   role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
   lastLoginAt?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  account?: Prisma.AccountCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryCreateNestedManyWithoutUserInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedUsersInput
-  deletedUsers?: Prisma.UserCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogCreateNestedManyWithoutActedByInput
+  emailVerifications?: Prisma.EmailVerificationCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
   id?: string
   name: string
-  username?: string | null
   email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
+  password?: string | null
+  emailVerified?: boolean
+  totpSecret?: string | null
+  twoFactorEnabled?: boolean
+  backupCodes?: Prisma.UserCreatebackupCodesInput | string[]
+  authProvider?: $Enums.AuthProvider
+  googleId?: string | null
   role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  deletedById?: string | null
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
   lastLoginAt?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  account?: Prisma.AccountUncheckedCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileUncheckedCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileUncheckedCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedCreateNestedManyWithoutUserInput
-  deletedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActedByInput
+  emailVerifications?: Prisma.EmailVerificationUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1416,791 +743,253 @@ export type UserUpdateToOneWithWhereWithoutSessionsInput = {
 export type UserUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  backupCodes?: Prisma.UserUpdatebackupCodesInput | string[]
+  authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUpdateManyWithoutUserNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedUsersNestedInput
-  deletedUsers?: Prisma.UserUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUpdateManyWithoutActedByNestedInput
+  emailVerifications?: Prisma.EmailVerificationUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  backupCodes?: Prisma.UserUpdatebackupCodesInput | string[]
+  authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUncheckedUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUncheckedUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUncheckedUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedUpdateManyWithoutUserNestedInput
-  deletedUsers?: Prisma.UserUncheckedUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUncheckedUpdateManyWithoutActedByNestedInput
+  emailVerifications?: Prisma.EmailVerificationUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserCreateWithoutCustomerProfileInput = {
+export type UserCreateWithoutEmailVerificationsInput = {
   id?: string
   name: string
-  username?: string | null
   email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
+  password?: string | null
+  emailVerified?: boolean
+  totpSecret?: string | null
+  twoFactorEnabled?: boolean
+  backupCodes?: Prisma.UserCreatebackupCodesInput | string[]
+  authProvider?: $Enums.AuthProvider
+  googleId?: string | null
   role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
   lastLoginAt?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  account?: Prisma.AccountCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  adminProfile?: Prisma.AdminProfileCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryCreateNestedManyWithoutUserInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedUsersInput
-  deletedUsers?: Prisma.UserCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogCreateNestedManyWithoutActedByInput
+  passwordResets?: Prisma.PasswordResetCreateNestedManyWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutCustomerProfileInput = {
+export type UserUncheckedCreateWithoutEmailVerificationsInput = {
   id?: string
   name: string
-  username?: string | null
   email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
+  password?: string | null
+  emailVerified?: boolean
+  totpSecret?: string | null
+  twoFactorEnabled?: boolean
+  backupCodes?: Prisma.UserCreatebackupCodesInput | string[]
+  authProvider?: $Enums.AuthProvider
+  googleId?: string | null
   role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  deletedById?: string | null
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
   lastLoginAt?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  account?: Prisma.AccountUncheckedCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  adminProfile?: Prisma.AdminProfileUncheckedCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedCreateNestedManyWithoutUserInput
-  deletedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActedByInput
+  passwordResets?: Prisma.PasswordResetUncheckedCreateNestedManyWithoutUserInput
 }
 
-export type UserCreateOrConnectWithoutCustomerProfileInput = {
+export type UserCreateOrConnectWithoutEmailVerificationsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutCustomerProfileInput, Prisma.UserUncheckedCreateWithoutCustomerProfileInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutEmailVerificationsInput, Prisma.UserUncheckedCreateWithoutEmailVerificationsInput>
 }
 
-export type UserUpsertWithoutCustomerProfileInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutCustomerProfileInput, Prisma.UserUncheckedUpdateWithoutCustomerProfileInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutCustomerProfileInput, Prisma.UserUncheckedCreateWithoutCustomerProfileInput>
+export type UserUpsertWithoutEmailVerificationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutEmailVerificationsInput, Prisma.UserUncheckedUpdateWithoutEmailVerificationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutEmailVerificationsInput, Prisma.UserUncheckedCreateWithoutEmailVerificationsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutCustomerProfileInput = {
+export type UserUpdateToOneWithWhereWithoutEmailVerificationsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutCustomerProfileInput, Prisma.UserUncheckedUpdateWithoutCustomerProfileInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutEmailVerificationsInput, Prisma.UserUncheckedUpdateWithoutEmailVerificationsInput>
 }
 
-export type UserUpdateWithoutCustomerProfileInput = {
+export type UserUpdateWithoutEmailVerificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  backupCodes?: Prisma.UserUpdatebackupCodesInput | string[]
+  authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUpdateManyWithoutUserNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedUsersNestedInput
-  deletedUsers?: Prisma.UserUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUpdateManyWithoutActedByNestedInput
+  passwordResets?: Prisma.PasswordResetUpdateManyWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutCustomerProfileInput = {
+export type UserUncheckedUpdateWithoutEmailVerificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  backupCodes?: Prisma.UserUpdatebackupCodesInput | string[]
+  authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUncheckedUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUncheckedUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedUpdateManyWithoutUserNestedInput
-  deletedUsers?: Prisma.UserUncheckedUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUncheckedUpdateManyWithoutActedByNestedInput
+  passwordResets?: Prisma.PasswordResetUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserCreateWithoutAdminProfileInput = {
+export type UserCreateWithoutPasswordResetsInput = {
   id?: string
   name: string
-  username?: string | null
   email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
+  password?: string | null
+  emailVerified?: boolean
+  totpSecret?: string | null
+  twoFactorEnabled?: boolean
+  backupCodes?: Prisma.UserCreatebackupCodesInput | string[]
+  authProvider?: $Enums.AuthProvider
+  googleId?: string | null
   role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
   lastLoginAt?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  account?: Prisma.AccountCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryCreateNestedManyWithoutUserInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedUsersInput
-  deletedUsers?: Prisma.UserCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogCreateNestedManyWithoutActedByInput
+  emailVerifications?: Prisma.EmailVerificationCreateNestedManyWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutAdminProfileInput = {
+export type UserUncheckedCreateWithoutPasswordResetsInput = {
   id?: string
   name: string
-  username?: string | null
   email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
+  password?: string | null
+  emailVerified?: boolean
+  totpSecret?: string | null
+  twoFactorEnabled?: boolean
+  backupCodes?: Prisma.UserCreatebackupCodesInput | string[]
+  authProvider?: $Enums.AuthProvider
+  googleId?: string | null
   role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  deletedById?: string | null
+  status?: $Enums.UserStatus
+  avatarUrl?: string | null
   lastLoginAt?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  account?: Prisma.AccountUncheckedCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileUncheckedCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedCreateNestedManyWithoutUserInput
-  deletedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActedByInput
+  emailVerifications?: Prisma.EmailVerificationUncheckedCreateNestedManyWithoutUserInput
 }
 
-export type UserCreateOrConnectWithoutAdminProfileInput = {
+export type UserCreateOrConnectWithoutPasswordResetsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutAdminProfileInput, Prisma.UserUncheckedCreateWithoutAdminProfileInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetsInput, Prisma.UserUncheckedCreateWithoutPasswordResetsInput>
 }
 
-export type UserUpsertWithoutAdminProfileInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutAdminProfileInput, Prisma.UserUncheckedUpdateWithoutAdminProfileInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutAdminProfileInput, Prisma.UserUncheckedCreateWithoutAdminProfileInput>
+export type UserUpsertWithoutPasswordResetsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPasswordResetsInput, Prisma.UserUncheckedUpdateWithoutPasswordResetsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetsInput, Prisma.UserUncheckedCreateWithoutPasswordResetsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutAdminProfileInput = {
+export type UserUpdateToOneWithWhereWithoutPasswordResetsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutAdminProfileInput, Prisma.UserUncheckedUpdateWithoutAdminProfileInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPasswordResetsInput, Prisma.UserUncheckedUpdateWithoutPasswordResetsInput>
 }
 
-export type UserUpdateWithoutAdminProfileInput = {
+export type UserUpdateWithoutPasswordResetsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  backupCodes?: Prisma.UserUpdatebackupCodesInput | string[]
+  authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUpdateManyWithoutUserNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedUsersNestedInput
-  deletedUsers?: Prisma.UserUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUpdateManyWithoutActedByNestedInput
+  emailVerifications?: Prisma.EmailVerificationUpdateManyWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutAdminProfileInput = {
+export type UserUncheckedUpdateWithoutPasswordResetsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  backupCodes?: Prisma.UserUpdatebackupCodesInput | string[]
+  authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUncheckedUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUncheckedUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedUpdateManyWithoutUserNestedInput
-  deletedUsers?: Prisma.UserUncheckedUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUncheckedUpdateManyWithoutActedByNestedInput
-}
-
-export type UserCreateWithoutPasswordHistoryInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  account?: Prisma.AccountCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileCreateNestedOneWithoutUserInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedUsersInput
-  deletedUsers?: Prisma.UserCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogCreateNestedManyWithoutActedByInput
-}
-
-export type UserUncheckedCreateWithoutPasswordHistoryInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  deletedById?: string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  account?: Prisma.AccountUncheckedCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileUncheckedCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileUncheckedCreateNestedOneWithoutUserInput
-  deletedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  auditActedBy?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActedByInput
-}
-
-export type UserCreateOrConnectWithoutPasswordHistoryInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutPasswordHistoryInput, Prisma.UserUncheckedCreateWithoutPasswordHistoryInput>
-}
-
-export type UserUpsertWithoutPasswordHistoryInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutPasswordHistoryInput, Prisma.UserUncheckedUpdateWithoutPasswordHistoryInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutPasswordHistoryInput, Prisma.UserUncheckedCreateWithoutPasswordHistoryInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutPasswordHistoryInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutPasswordHistoryInput, Prisma.UserUncheckedUpdateWithoutPasswordHistoryInput>
-}
-
-export type UserUpdateWithoutPasswordHistoryInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUpdateOneWithoutUserNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedUsersNestedInput
-  deletedUsers?: Prisma.UserUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUpdateManyWithoutActedByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutPasswordHistoryInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUncheckedUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUncheckedUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUncheckedUpdateOneWithoutUserNestedInput
-  deletedUsers?: Prisma.UserUncheckedUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUncheckedUpdateManyWithoutActedByNestedInput
-}
-
-export type UserCreateWithoutAuditLogsInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  account?: Prisma.AccountCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryCreateNestedManyWithoutUserInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedUsersInput
-  deletedUsers?: Prisma.UserCreateNestedManyWithoutDeletedByInput
-  auditActedBy?: Prisma.AuditLogCreateNestedManyWithoutActedByInput
-}
-
-export type UserUncheckedCreateWithoutAuditLogsInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  deletedById?: string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  account?: Prisma.AccountUncheckedCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileUncheckedCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileUncheckedCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedCreateNestedManyWithoutUserInput
-  deletedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutDeletedByInput
-  auditActedBy?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActedByInput
-}
-
-export type UserCreateOrConnectWithoutAuditLogsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutAuditLogsInput, Prisma.UserUncheckedCreateWithoutAuditLogsInput>
-}
-
-export type UserCreateWithoutAuditActedByInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  account?: Prisma.AccountCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryCreateNestedManyWithoutUserInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedUsersInput
-  deletedUsers?: Prisma.UserCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutAuditActedByInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  deletedById?: string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  account?: Prisma.AccountUncheckedCreateNestedOneWithoutUserInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  customerProfile?: Prisma.CustomerProfileUncheckedCreateNestedOneWithoutUserInput
-  adminProfile?: Prisma.AdminProfileUncheckedCreateNestedOneWithoutUserInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedCreateNestedManyWithoutUserInput
-  deletedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutDeletedByInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutAuditActedByInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutAuditActedByInput, Prisma.UserUncheckedCreateWithoutAuditActedByInput>
-}
-
-export type UserUpsertWithoutAuditLogsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutAuditLogsInput, Prisma.UserUncheckedUpdateWithoutAuditLogsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutAuditLogsInput, Prisma.UserUncheckedCreateWithoutAuditLogsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutAuditLogsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutAuditLogsInput, Prisma.UserUncheckedUpdateWithoutAuditLogsInput>
-}
-
-export type UserUpdateWithoutAuditLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUpdateManyWithoutUserNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedUsersNestedInput
-  deletedUsers?: Prisma.UserUpdateManyWithoutDeletedByNestedInput
-  auditActedBy?: Prisma.AuditLogUpdateManyWithoutActedByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutAuditLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUncheckedUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUncheckedUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUncheckedUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedUpdateManyWithoutUserNestedInput
-  deletedUsers?: Prisma.UserUncheckedUpdateManyWithoutDeletedByNestedInput
-  auditActedBy?: Prisma.AuditLogUncheckedUpdateManyWithoutActedByNestedInput
-}
-
-export type UserUpsertWithoutAuditActedByInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutAuditActedByInput, Prisma.UserUncheckedUpdateWithoutAuditActedByInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutAuditActedByInput, Prisma.UserUncheckedCreateWithoutAuditActedByInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutAuditActedByInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutAuditActedByInput, Prisma.UserUncheckedUpdateWithoutAuditActedByInput>
-}
-
-export type UserUpdateWithoutAuditActedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUpdateManyWithoutUserNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedUsersNestedInput
-  deletedUsers?: Prisma.UserUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutAuditActedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUncheckedUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUncheckedUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUncheckedUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedUpdateManyWithoutUserNestedInput
-  deletedUsers?: Prisma.UserUncheckedUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateManyDeletedByInput = {
-  id?: string
-  name: string
-  username?: string | null
-  email: string
-  country?: string | null
-  city?: string | null
-  timezone?: string | null
-  locale?: string
-  role?: $Enums.UserRole
-  status: $Enums.UserStatus
-  banReason?: string | null
-  bannedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type UserUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUpdateManyWithoutUserNestedInput
-  deletedUsers?: Prisma.UserUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUpdateManyWithoutActedByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountUncheckedUpdateOneWithoutUserNestedInput
-  oauthProviders?: Prisma.OAuthProviderOptionsUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  customerProfile?: Prisma.CustomerProfileUncheckedUpdateOneWithoutUserNestedInput
-  adminProfile?: Prisma.AdminProfileUncheckedUpdateOneWithoutUserNestedInput
-  passwordHistory?: Prisma.PasswordHistoryUncheckedUpdateManyWithoutUserNestedInput
-  deletedUsers?: Prisma.UserUncheckedUpdateManyWithoutDeletedByNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  auditActedBy?: Prisma.AuditLogUncheckedUpdateManyWithoutActedByNestedInput
-}
-
-export type UserUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timezone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifications?: Prisma.EmailVerificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -2209,21 +998,15 @@ export type UserUncheckedUpdateManyWithoutDeletedByInput = {
  */
 
 export type UserCountOutputType = {
-  oauthProviders: number
   sessions: number
-  passwordHistory: number
-  deletedUsers: number
-  auditLogs: number
-  auditActedBy: number
+  emailVerifications: number
+  passwordResets: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  oauthProviders?: boolean | UserCountOutputTypeCountOauthProvidersArgs
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
-  passwordHistory?: boolean | UserCountOutputTypeCountPasswordHistoryArgs
-  deletedUsers?: boolean | UserCountOutputTypeCountDeletedUsersArgs
-  auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
-  auditActedBy?: boolean | UserCountOutputTypeCountAuditActedByArgs
+  emailVerifications?: boolean | UserCountOutputTypeCountEmailVerificationsArgs
+  passwordResets?: boolean | UserCountOutputTypeCountPasswordResetsArgs
 }
 
 /**
@@ -2239,13 +1022,6 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountOauthProvidersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.OAuthProviderOptionsWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SessionWhereInput
 }
@@ -2253,176 +1029,135 @@ export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.E
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountPasswordHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PasswordHistoryWhereInput
+export type UserCountOutputTypeCountEmailVerificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmailVerificationWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountDeletedUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AuditLogWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountAuditActedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AuditLogWhereInput
+export type UserCountOutputTypeCountPasswordResetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PasswordResetWhereInput
 }
 
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  username?: boolean
   email?: boolean
-  country?: boolean
-  city?: boolean
-  timezone?: boolean
-  locale?: boolean
+  password?: boolean
+  emailVerified?: boolean
+  totpSecret?: boolean
+  twoFactorEnabled?: boolean
+  backupCodes?: boolean
+  authProvider?: boolean
+  googleId?: boolean
   role?: boolean
   status?: boolean
-  banReason?: boolean
-  bannedAt?: boolean
-  deletedAt?: boolean
-  deletedById?: boolean
+  avatarUrl?: boolean
   lastLoginAt?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  account?: boolean | Prisma.User$accountArgs<ExtArgs>
-  oauthProviders?: boolean | Prisma.User$oauthProvidersArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  customerProfile?: boolean | Prisma.User$customerProfileArgs<ExtArgs>
-  adminProfile?: boolean | Prisma.User$adminProfileArgs<ExtArgs>
-  passwordHistory?: boolean | Prisma.User$passwordHistoryArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.User$deletedByArgs<ExtArgs>
-  deletedUsers?: boolean | Prisma.User$deletedUsersArgs<ExtArgs>
-  auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
-  auditActedBy?: boolean | Prisma.User$auditActedByArgs<ExtArgs>
+  emailVerifications?: boolean | Prisma.User$emailVerificationsArgs<ExtArgs>
+  passwordResets?: boolean | Prisma.User$passwordResetsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  username?: boolean
   email?: boolean
-  country?: boolean
-  city?: boolean
-  timezone?: boolean
-  locale?: boolean
+  password?: boolean
+  emailVerified?: boolean
+  totpSecret?: boolean
+  twoFactorEnabled?: boolean
+  backupCodes?: boolean
+  authProvider?: boolean
+  googleId?: boolean
   role?: boolean
   status?: boolean
-  banReason?: boolean
-  bannedAt?: boolean
-  deletedAt?: boolean
-  deletedById?: boolean
+  avatarUrl?: boolean
   lastLoginAt?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  deletedBy?: boolean | Prisma.User$deletedByArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  username?: boolean
   email?: boolean
-  country?: boolean
-  city?: boolean
-  timezone?: boolean
-  locale?: boolean
+  password?: boolean
+  emailVerified?: boolean
+  totpSecret?: boolean
+  twoFactorEnabled?: boolean
+  backupCodes?: boolean
+  authProvider?: boolean
+  googleId?: boolean
   role?: boolean
   status?: boolean
-  banReason?: boolean
-  bannedAt?: boolean
-  deletedAt?: boolean
-  deletedById?: boolean
+  avatarUrl?: boolean
   lastLoginAt?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  deletedBy?: boolean | Prisma.User$deletedByArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
   id?: boolean
   name?: boolean
-  username?: boolean
   email?: boolean
-  country?: boolean
-  city?: boolean
-  timezone?: boolean
-  locale?: boolean
+  password?: boolean
+  emailVerified?: boolean
+  totpSecret?: boolean
+  twoFactorEnabled?: boolean
+  backupCodes?: boolean
+  authProvider?: boolean
+  googleId?: boolean
   role?: boolean
   status?: boolean
-  banReason?: boolean
-  bannedAt?: boolean
-  deletedAt?: boolean
-  deletedById?: boolean
+  avatarUrl?: boolean
   lastLoginAt?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "username" | "email" | "country" | "city" | "timezone" | "locale" | "role" | "status" | "banReason" | "bannedAt" | "deletedAt" | "deletedById" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "emailVerified" | "totpSecret" | "twoFactorEnabled" | "backupCodes" | "authProvider" | "googleId" | "role" | "status" | "avatarUrl" | "lastLoginAt" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  account?: boolean | Prisma.User$accountArgs<ExtArgs>
-  oauthProviders?: boolean | Prisma.User$oauthProvidersArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  customerProfile?: boolean | Prisma.User$customerProfileArgs<ExtArgs>
-  adminProfile?: boolean | Prisma.User$adminProfileArgs<ExtArgs>
-  passwordHistory?: boolean | Prisma.User$passwordHistoryArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.User$deletedByArgs<ExtArgs>
-  deletedUsers?: boolean | Prisma.User$deletedUsersArgs<ExtArgs>
-  auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
-  auditActedBy?: boolean | Prisma.User$auditActedByArgs<ExtArgs>
+  emailVerifications?: boolean | Prisma.User$emailVerificationsArgs<ExtArgs>
+  passwordResets?: boolean | Prisma.User$passwordResetsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  deletedBy?: boolean | Prisma.User$deletedByArgs<ExtArgs>
-}
-export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  deletedBy?: boolean | Prisma.User$deletedByArgs<ExtArgs>
-}
+export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    account: Prisma.$AccountPayload<ExtArgs> | null
-    oauthProviders: Prisma.$OAuthProviderOptionsPayload<ExtArgs>[]
     sessions: Prisma.$SessionPayload<ExtArgs>[]
-    customerProfile: Prisma.$CustomerProfilePayload<ExtArgs> | null
-    adminProfile: Prisma.$AdminProfilePayload<ExtArgs> | null
-    passwordHistory: Prisma.$PasswordHistoryPayload<ExtArgs>[]
-    deletedBy: Prisma.$UserPayload<ExtArgs> | null
-    deletedUsers: Prisma.$UserPayload<ExtArgs>[]
-    auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
-    auditActedBy: Prisma.$AuditLogPayload<ExtArgs>[]
+    emailVerifications: Prisma.$EmailVerificationPayload<ExtArgs>[]
+    passwordResets: Prisma.$PasswordResetPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
-    username: string | null
     email: string
-    country: string | null
-    city: string | null
-    timezone: string | null
-    locale: string
+    password: string | null
+    emailVerified: boolean
+    totpSecret: string | null
+    twoFactorEnabled: boolean
+    backupCodes: string[]
+    authProvider: $Enums.AuthProvider
+    googleId: string | null
     role: $Enums.UserRole
     status: $Enums.UserStatus
-    banReason: string | null
-    bannedAt: Date | null
-    deletedAt: Date | null
-    deletedById: string | null
+    avatarUrl: string | null
     lastLoginAt: Date | null
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -2819,16 +1554,9 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  account<T extends Prisma.User$accountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountArgs<ExtArgs>>): Prisma.Prisma__AccountClient<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  oauthProviders<T extends Prisma.User$oauthProvidersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$oauthProvidersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OAuthProviderOptionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  customerProfile<T extends Prisma.User$customerProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$customerProfileArgs<ExtArgs>>): Prisma.Prisma__CustomerProfileClient<runtime.Types.Result.GetResult<Prisma.$CustomerProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  adminProfile<T extends Prisma.User$adminProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$adminProfileArgs<ExtArgs>>): Prisma.Prisma__AdminProfileClient<runtime.Types.Result.GetResult<Prisma.$AdminProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  passwordHistory<T extends Prisma.User$passwordHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  deletedBy<T extends Prisma.User$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  deletedUsers<T extends Prisma.User$deletedUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deletedUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  auditLogs<T extends Prisma.User$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  auditActedBy<T extends Prisma.User$auditActedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditActedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  emailVerifications<T extends Prisma.User$emailVerificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emailVerificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailVerificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  passwordResets<T extends Prisma.User$passwordResetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordResetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2860,19 +1588,19 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
-  readonly username: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
-  readonly country: Prisma.FieldRef<"User", 'String'>
-  readonly city: Prisma.FieldRef<"User", 'String'>
-  readonly timezone: Prisma.FieldRef<"User", 'String'>
-  readonly locale: Prisma.FieldRef<"User", 'String'>
+  readonly password: Prisma.FieldRef<"User", 'String'>
+  readonly emailVerified: Prisma.FieldRef<"User", 'Boolean'>
+  readonly totpSecret: Prisma.FieldRef<"User", 'String'>
+  readonly twoFactorEnabled: Prisma.FieldRef<"User", 'Boolean'>
+  readonly backupCodes: Prisma.FieldRef<"User", 'String[]'>
+  readonly authProvider: Prisma.FieldRef<"User", 'AuthProvider'>
+  readonly googleId: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
   readonly status: Prisma.FieldRef<"User", 'UserStatus'>
-  readonly banReason: Prisma.FieldRef<"User", 'String'>
-  readonly bannedAt: Prisma.FieldRef<"User", 'DateTime'>
-  readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
-  readonly deletedById: Prisma.FieldRef<"User", 'String'>
+  readonly avatarUrl: Prisma.FieldRef<"User", 'String'>
   readonly lastLoginAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -3129,10 +1857,6 @@ export type UserCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.UserCreateManyInput | Prisma.UserCreateManyInput[]
   skipDuplicates?: boolean
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -3203,10 +1927,6 @@ export type UserUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Users to update.
    */
   limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -3276,49 +1996,6 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.account
- */
-export type User$accountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Account
-   */
-  select?: Prisma.AccountSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Account
-   */
-  omit?: Prisma.AccountOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AccountInclude<ExtArgs> | null
-  where?: Prisma.AccountWhereInput
-}
-
-/**
- * User.oauthProviders
- */
-export type User$oauthProvidersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the OAuthProviderOptions
-   */
-  select?: Prisma.OAuthProviderOptionsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the OAuthProviderOptions
-   */
-  omit?: Prisma.OAuthProviderOptionsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.OAuthProviderOptionsInclude<ExtArgs> | null
-  where?: Prisma.OAuthProviderOptionsWhereInput
-  orderBy?: Prisma.OAuthProviderOptionsOrderByWithRelationInput | Prisma.OAuthProviderOptionsOrderByWithRelationInput[]
-  cursor?: Prisma.OAuthProviderOptionsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.OAuthProviderOptionsScalarFieldEnum | Prisma.OAuthProviderOptionsScalarFieldEnum[]
-}
-
-/**
  * User.sessions
  */
 export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3343,156 +2020,51 @@ export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * User.customerProfile
+ * User.emailVerifications
  */
-export type User$customerProfileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$emailVerificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the CustomerProfile
+   * Select specific fields to fetch from the EmailVerification
    */
-  select?: Prisma.CustomerProfileSelect<ExtArgs> | null
+  select?: Prisma.EmailVerificationSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the CustomerProfile
+   * Omit specific fields from the EmailVerification
    */
-  omit?: Prisma.CustomerProfileOmit<ExtArgs> | null
+  omit?: Prisma.EmailVerificationOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.CustomerProfileInclude<ExtArgs> | null
-  where?: Prisma.CustomerProfileWhereInput
-}
-
-/**
- * User.adminProfile
- */
-export type User$adminProfileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AdminProfile
-   */
-  select?: Prisma.AdminProfileSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the AdminProfile
-   */
-  omit?: Prisma.AdminProfileOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AdminProfileInclude<ExtArgs> | null
-  where?: Prisma.AdminProfileWhereInput
-}
-
-/**
- * User.passwordHistory
- */
-export type User$passwordHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PasswordHistory
-   */
-  select?: Prisma.PasswordHistorySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PasswordHistory
-   */
-  omit?: Prisma.PasswordHistoryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PasswordHistoryInclude<ExtArgs> | null
-  where?: Prisma.PasswordHistoryWhereInput
-  orderBy?: Prisma.PasswordHistoryOrderByWithRelationInput | Prisma.PasswordHistoryOrderByWithRelationInput[]
-  cursor?: Prisma.PasswordHistoryWhereUniqueInput
+  include?: Prisma.EmailVerificationInclude<ExtArgs> | null
+  where?: Prisma.EmailVerificationWhereInput
+  orderBy?: Prisma.EmailVerificationOrderByWithRelationInput | Prisma.EmailVerificationOrderByWithRelationInput[]
+  cursor?: Prisma.EmailVerificationWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.PasswordHistoryScalarFieldEnum | Prisma.PasswordHistoryScalarFieldEnum[]
+  distinct?: Prisma.EmailVerificationScalarFieldEnum | Prisma.EmailVerificationScalarFieldEnum[]
 }
 
 /**
- * User.deletedBy
+ * User.passwordResets
  */
-export type User$deletedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$passwordResetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the User
+   * Select specific fields to fetch from the PasswordReset
    */
-  select?: Prisma.UserSelect<ExtArgs> | null
+  select?: Prisma.PasswordResetSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the User
+   * Omit specific fields from the PasswordReset
    */
-  omit?: Prisma.UserOmit<ExtArgs> | null
+  omit?: Prisma.PasswordResetOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-}
-
-/**
- * User.deletedUsers
- */
-export type User$deletedUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
-  cursor?: Prisma.UserWhereUniqueInput
+  include?: Prisma.PasswordResetInclude<ExtArgs> | null
+  where?: Prisma.PasswordResetWhereInput
+  orderBy?: Prisma.PasswordResetOrderByWithRelationInput | Prisma.PasswordResetOrderByWithRelationInput[]
+  cursor?: Prisma.PasswordResetWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
-}
-
-/**
- * User.auditLogs
- */
-export type User$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AuditLog
-   */
-  select?: Prisma.AuditLogSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the AuditLog
-   */
-  omit?: Prisma.AuditLogOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AuditLogInclude<ExtArgs> | null
-  where?: Prisma.AuditLogWhereInput
-  orderBy?: Prisma.AuditLogOrderByWithRelationInput | Prisma.AuditLogOrderByWithRelationInput[]
-  cursor?: Prisma.AuditLogWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AuditLogScalarFieldEnum | Prisma.AuditLogScalarFieldEnum[]
-}
-
-/**
- * User.auditActedBy
- */
-export type User$auditActedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AuditLog
-   */
-  select?: Prisma.AuditLogSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the AuditLog
-   */
-  omit?: Prisma.AuditLogOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AuditLogInclude<ExtArgs> | null
-  where?: Prisma.AuditLogWhereInput
-  orderBy?: Prisma.AuditLogOrderByWithRelationInput | Prisma.AuditLogOrderByWithRelationInput[]
-  cursor?: Prisma.AuditLogWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AuditLogScalarFieldEnum | Prisma.AuditLogScalarFieldEnum[]
+  distinct?: Prisma.PasswordResetScalarFieldEnum | Prisma.PasswordResetScalarFieldEnum[]
 }
 
 /**
